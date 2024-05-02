@@ -1,0 +1,126 @@
+Given elements as nodes of the two linked lists. The task is to multiply these two linked lists, say L1 and L2. 
+
+Note: The output could be large take modulo 109+7.
+
+Example:
+
+Input:
+2
+2
+3 2
+1
+2
+3
+1 0 0
+2
+1 0 
+Output:
+64
+1000
+
+Explanation:
+Testcase 1: 32*2 = 64.
+Testcase 2: 100*10 = 1000
+
+
+long long  multiplyTwoLists (Node* root1, Node* root2)
+{
+  //Your code here
+  struct Node* temp1 = root1;
+  struct Node* temp2 = root2;
+  long long res1 = 0;
+  long long res2 = 0;
+  while(temp1 != NULL) {
+       
+           res1 = res1 * 10;
+           res1 = (res1 + temp1->data)%1000000007;
+       
+     
+      temp1 = temp1->next;
+      
+  }
+  while(temp2 != NULL) {
+    
+           res2 = res2 * 10;
+           res2 = (res2 + temp2->data)%1000000007;
+       
+      temp2 = temp2->next;
+      
+  }
+long long result  = (res1*res2)%1000000007;
+return result;
+}
+
+
+Given a Circular Linked List of size N. The task is to delete the given node in the circular linked list and then print the reverse of the circular linked list.
+
+ 
+
+Example 1:
+
+
+Input:
+5
+2 5 7 8 10
+8
+
+Output:
+10 7 5 2
+Explanation: 
+After deleting 8 from the given circular linked 
+list, it has elements as 2, 5, 7, 10. Now, 
+reversing this list will result in 10, 7, 5, 2.
+
+
+
+
+void deleteNode(struct Node **head, int key) {
+    if (*head == nullptr) return;
+
+    struct Node* temp = *head;
+    struct Node* prev = nullptr;
+
+    // If the node to be deleted is the head node
+    if (temp->data == key) {
+        struct Node* last = *head;
+        while (last->next != *head) {
+            last = last->next;
+        }
+        last->next = temp->next;
+        *head = temp->next;
+        free(temp);
+        return;
+    }
+
+    // Traverse the list to find the node to delete
+    while (temp->data != key) {
+        prev = temp;
+        temp = temp->next;
+        // If the key is not found, return
+        if (temp == *head) return;
+    }
+
+    // Skip the node to be deleted
+    prev->next = temp->next;
+    free(temp);
+}
+
+void reverse(struct Node** head) {
+    if (*head == nullptr) return;
+
+    struct Node* prev = nullptr;
+    struct Node* curr = *head;
+    struct Node* next = nullptr;
+
+    // Traverse the list and reverse pointers
+    do {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    } while (curr != *head);
+
+    // Adjust the head pointer
+    (*head)->next = prev;
+    *head = prev;
+}
