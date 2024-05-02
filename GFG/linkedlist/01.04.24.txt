@@ -1,0 +1,215 @@
+Given a singly linked list of size N. The task is to swap elements in the linked list pairwise.
+For example, if the input list is 1 2 3 4, the resulting list after swaps will be 2 1 4 3.
+Note: You need to swap the nodes, not only the data. If only data is swapped then driver will print -1.
+
+Example 1:
+
+Input:
+LinkedList: 1->2->2->4->5->6->7->8
+Output: 
+2 1 4 2 6 5 8 7
+Explanation: 
+After swapping each pair considering (1,2), (2, 4), (5, 6).. so on as pairs, we get 2, 1, 4, 2, 6, 5, 8, 7 as a new linked list.
+class Solution
+{
+    public:
+    Node* pairWiseSwap(struct Node* head) 
+    {
+        // The task is to complete this method
+       struct Node *prev = head;
+       struct Node *curr = head->next;
+       struct Node *new_head = curr;
+       if(head == NULL || head->next == NULL) return head;
+       while(1){
+           struct Node *nextnode = curr->next;
+           curr->next = prev;
+           if(nextnode == NULL || nextnode->next == NULL){
+               prev->next = nextnode;
+               break;
+           }
+           prev->next = nextnode->next;
+           prev = nextnode;
+           curr  = nextnode->next;
+       }
+        return new_head;
+    }
+   
+};
+Given a sorted doubly linked list and an element X, your need to insert the element X into correct position in the sorted DLL.
+
+Note: The DLL is sorted in ascending order
+
+Example:
+
+Input:
+LinkedList:
+
+X = 9
+Output:
+Node* sortedInsert(Node * head, int x)
+{
+	// Code here
+	struct Node *temp=head;
+	if(x<=head->data){
+	    struct Node *newnode = (struct Node *)malloc(sizeof(struct Node));
+	    newnode->data = x;
+	    newnode->prev = NULL;
+	    head->prev = newnode;
+	    newnode->next = head;
+	    head = newnode;
+	    return head;
+	}
+	while(temp != NULL){
+	    if(x<=temp->data){
+	        struct Node *newnode = (struct Node *)malloc(sizeof(struct Node));
+	        newnode->data = x;
+	        temp->prev->next = newnode;
+	        newnode->prev = temp->prev;
+	        newnode->next = temp;
+	        temp->prev = newnode;
+	        break;
+	    }
+	    
+	    if(temp->next == NULL){
+	        struct Node *newnode = (struct Node *)malloc(sizeof(struct Node));
+	        newnode->data = x;
+	        newnode->next = NULL;
+	        temp->next = newnode;
+	        newnode->prev = temp;
+	        return head;
+	    }
+	    temp=temp->next;
+	}
+	
+	        
+	return head;
+};
+
+An ordinary Doubly Linked List requires space for two address fields to store the addresses of previous and next nodes. A memory efficient version of Doubly Linked List can be created using only one space for address field with every node. This memory efficient Doubly Linked List is called XOR Linked List or Memory Efficient as the list uses bit-wise XOR operation to save space for one address.
+Given stream of data of size N for the linked list, your task is to complete the function insert() and printList(). The insert() function pushes (or inserts at beginning) the given data in the linked list and the printList() function returns the linked list as a list.
+Note: There is an utility function XOR() that takes two Node pointer to get the bit-wise XOR of the two Node pointer. Use this function to get the XOR of the two pointers.
+
+Example 1:
+
+Input:
+LinkedList: 9<->5<->4<->7<->3<->10
+Output:
+10 3 7 4 5 9
+9 5 4 7 3 10
+Example 2:
+
+Input:
+LinkedList: 58<->96<->31
+Output:
+31 96 58
+58 96 31
+
+    
+    // Code here
+    struct Node *newnode = (struct Node *)malloc(sizeof(struct Node));
+    newnode->data = data;
+    newnode->npx = head;
+    if(head != NULL){
+        head->npx = XOR(newnode,head->npx);
+    }
+    head = newnode;
+    return head;
+}
+
+vector<int> printList(struct Node* head) {
+    vector<int> result;
+    struct Node *prev = NULL, *curr = head, *next;
+    while (curr != NULL) {
+        result.push_back(curr->data);
+        next = XOR(prev, curr->npx);
+        prev = curr;
+        curr = next;
+    }
+    return result;
+}
+
+Given a linked list, delete N nodes after skipping M nodes of a linked list until the last of the linked list.
+
+Example:
+Input:
+2
+8
+2 1
+9 1 3 5 9 4 10 1
+6
+6 1
+1 2 3 4 5 6 
+
+Output: 
+9 1 5 9 10 1
+1 2 3 4 5 6
+
+Explanation:
+Deleting one node after skipping the M nodes each time, we have list as 9-> 1-> 5-> 9-> 10-> 1.
+Input:
+The first line of input contains the number of test cases T. For each test case, the first line of input contains a number of elements in the linked list, and the next M and N respectively space-separated. The last line contains the elements of the linked list.
+
+class Solution
+{
+    public:
+    void linkdelete(struct Node  *head, int M, int N)
+    {
+        //Add code here   
+        struct Node *temp = head,*prev;
+        while(temp != NULL) {
+        for(int i=1;i<=M && temp != NULL;i++){
+            prev =temp;
+            temp  = temp->next;
+        }
+        for(int i=1;i<=N && temp != NULL;i++){
+           
+            temp = temp->next;
+        }
+         if (prev != NULL) {
+                prev->next = temp;
+            }
+        }
+    }
+};
+Given a singly linked list having n nodes, your task is to remove every kth node from the linked list. 
+
+Example 1:
+
+Input:
+n = 8
+linked list: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 
+k = 2
+Output: 
+1 -> 3 -> 5 -> 7
+Explanation: 
+After removing every 2nd node of the linked list, the resultant linked list will be: 1 -> 3 -> 5 -> 7.
+
+class Solution {
+public:
+    Node* deleteK(Node *head, int K) {
+        //Your code here
+        struct Node *temp = head, *prev;
+        while (temp != NULL) {
+            // Skip K-1 nodes
+            int i;
+            for (i = 1; i < K && temp != NULL; i++) {
+                prev = temp;
+                temp = temp->next;
+            }
+            
+            if (temp == NULL) 
+                break;
+            
+            if (temp == head) { 
+                head = temp->next;
+                free(temp);
+                temp = head;
+            } else {
+                prev->next = temp->next;
+                free(temp);
+                temp = prev->next;
+            }
+        }
+        return head;
+    }
+};

@@ -1,0 +1,204 @@
+Given a binary tree, find its preorder traversal.
+
+Example 1:
+
+Input:
+        1      
+      /          
+    4    
+  /    \   
+4       2
+Output: 1 4 4 2 
+
+Example 2:
+
+Input:
+       6
+     /   \
+    3     2
+     \   / 
+      1 2
+Output: 6 3 1 2 2 
+
+Your Task:
+You just have to complete the function preorder() which takes the root node of the tree as input and returns an array containing the preorder traversal of the tree.
+
+
+
+int arr[10000];
+int i = 0; // Global variable to track the position in the array
+
+// Recursive function to perform preorder traversal
+void preorderUtil(struct Node* root) {
+    if (root == NULL) {
+        return;
+    }
+    
+    arr[i++] = root->data; // Store the current node's data
+    
+    // Traverse left subtree
+    preorderUtil(root->left);
+    
+    // Traverse right subtree
+    preorderUtil(root->right);
+}
+
+// Function to return a list containing the preorder traversal of the tree.
+int* preorder(struct Node* root) {
+    // Reset the index variable before traversal
+    i = 0;
+    
+    // Perform preorder traversal
+    preorderUtil(root);
+    
+    return arr;
+}
+
+Given a Binary Tree, find the In-Order Traversal of it.
+
+Example 1:
+
+Input:
+       1
+     /  \
+    3    2
+Output: 3 1 2
+
+Example 2:
+
+Input:
+        10
+     /      \ 
+    20       30 
+  /    \    /
+ 40    60  50
+Output: 40 20 60 10 50 30
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function inOrder() that takes root node of the tree as input and returns a list containing the In-Order Traversal of the given Binary Tree.
+
+
+int arr[100000];
+int i=0;
+
+void inorderutil(struct Node* root) {
+    if(root == NULL) return;
+    inorderutil(root->left);
+    arr[i++] = root->data;
+    inorderutil(root->right);
+}
+// Function to return a list containing the inorder traversal of the tree.
+int* inOrder(struct Node* root) {
+    // code herei 
+    i =0;
+    inorderutil(root);
+    return arr; // do not change the default values(i.e -1) in the unused array
+                // indices.
+}
+
+Given a binary tree, find the Postorder Traversal of it.
+For Example, the postorder traversal of the following tree is:
+5 10 39 1
+
+        1
+     /     \
+   10     39
+  /
+5
+
+
+Example 1:
+
+Input:
+        19
+     /     \
+    10      8
+  /    \
+ 11    13
+Output: 11 13 10 8 19
+
+Example 2:
+
+Input:
+          11
+         /
+       15
+      /
+     7
+Output: 7 15 11
+
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function postOrder() that takes root node as input and returns an array containing the postorder traversal of the given Binary Tree.
+
+
+int arr[100000];
+int i=0;
+void postorderutil(struct Node* root) {
+    if(root == NULL) return NULL;
+    postorderutil(root->left);
+    postorderutil(root->right);
+    arr[i++] = root->data;
+}
+//Function to return a list containing the postorder traversal of the tree.
+int* postOrder(struct Node* root)
+{
+    //code here
+    i =0;
+    postorderutil(root);
+    return arr;     //do not change the default values(i.e -1) in the unused array indices.
+}
+
+
+Given a Binary Tree of size N, You have to count leaves in it. For example, there are two leaves in following tree
+
+        1
+     /      \
+   10      39
+  /
+5
+
+ 
+
+Example 1:
+
+
+Input:
+Given Tree is 
+               4
+             /   \
+            8     10
+           /     /   \
+          7     5     1
+         /
+        3 
+Output:
+3
+Explanation: 
+Three leaves are 3 , 5 and 1.
+
+ 
+
+Your Task:
+You don't have to take input. Complete the function countLeaves() that takes root node of the given tree as parameter and returns the count of leaves in tree. The printing is done by the driver code.
+ 
+ 
+    int c = 0;
+ void preorder(struct Node* root) {
+     if(root == NULL) return;
+       if(root->left == NULL && root->right == NULL) {
+      c++;
+      return;
+  }
+  
+  preorder(root->left);
+ preorder(root->right);
+   }
+int countLeaves(Node* root)
+{
+  // Your code here
+  c=0;
+  preorder(root);
+  return c;
+}
+

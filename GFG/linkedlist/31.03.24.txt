@@ -1,0 +1,144 @@
+Given a linked list of N nodes where nodes can contain values 0s, 1s, and 2s only. The task is to segregate 0s, 1s, and 2s linked list such that all zeros segregate to head side, 2s at the end of the linked list, and 1s in the mid of 0s and 2s.
+
+Example 1:
+
+Input:
+N = 8
+value[] = {1,2,2,1,2,0,2,2}
+Output: 0 1 1 2 2 2 2 2
+Explanation: All the 0s are segregated
+to the left end of the linked list,
+2s to the right end of the list, and
+1s in between.
+
+class Solution
+{
+    public:
+    //Function to sort a linked list of 0s, 1s and 2s.
+    Node* segregate(Node *head) {
+        
+        // Add code here
+        struct Node *temp1 = head,*temp2;
+        while(temp1!= NULL){
+            temp2 = temp1;
+            while(temp2->next!=NULL){
+                if(temp1->data > temp2->next->data){
+                   int temp = temp2->next->data;
+                   temp2->next->data = temp1->data;
+                   temp1->data = temp;
+                   temp2 = temp1;
+                }
+                else{
+                    temp2=temp2->next;
+                }
+            }
+            temp1= temp1->next;
+        }
+        return head;
+        
+    }
+};
+Given a singly linked list, remove all the nodes in the list which have any node on their right whose value is greater. (Not just immediate Right , but entire List on the Right)
+
+Example 1:
+
+Input:
+LinkedList = 12->15->10->11->5->6->2->3
+Output: 15 11 6 3
+Explanation: Since, 12, 10, 5 and 2 are
+the elements which have greater elements
+on the following nodes. So, after deleting
+them, the linked list would like be 15,
+11, 6, 3.
+failed for some cases
+class Solution
+{
+    public:
+    Node *compute(Node *head)
+    {
+        // your code goes herestrc
+        
+        struct Node *temp =head,*prev;
+        if (head == NULL || head->next == NULL) {
+            return head;
+        }
+        while(head->next!=NULL){
+        if(head->data < head->next->data){
+            struct Node *rem = head;
+            head = head->next;
+            free(rem);
+        }
+        else if(head->next == NULL) {
+            return head;
+        }
+        else{
+            break;
+        }
+        }
+        temp = head;
+        while(temp->next != NULL){
+             
+            if(temp->data < temp->next->data){
+               struct Node *rem = temp;
+                 if (prev == NULL) {
+                    head = temp->next;
+                } else {
+                    prev->next = temp->next;
+                }
+                  temp = temp->next;
+                free(rem);
+            }
+            else{
+                prev = temp;
+                temp = temp->next;
+            }
+            
+        }
+        return head;
+    }
+    
+};
+
+Given two linked lists sorted in increasing order, create a new linked list representing the intersection of the two linked lists. The new linked list should be made with without changing the original lists.
+
+Note: The elements of the linked list are not necessarily distinct.
+
+Example 1:
+
+Input:
+LinkedList1 = 1->2->3->4->6
+LinkedList2 = 2->4->6->8
+Output: 2 4 6
+Explanation: For the given two
+linked list, 2, 4 and 6 are the elements
+in the intersection.
+class Solution
+{
+    public:
+    Node* findIntersection(Node* head1, Node* head2)
+    {
+        // code goes here.
+        struct Node *dummy = (struct Node*)malloc(sizeof(struct Node));
+        struct Node *tail = dummy;
+        
+        while(head1 != NULL && head2 != NULL){
+            if(head1->data == head2->data){
+                struct Node *newnode = (struct Node*)malloc(sizeof(struct Node));
+                newnode->data = head2->data;
+                newnode->next = NULL;
+                tail->next = newnode;
+                tail = tail->next;
+                head1 = head1->next;
+                head2 = head2->next;
+            }
+            else if(head1->data < head2->data){
+                head1 = head1->next;
+            }
+            else{
+                head2 = head2->next;
+            }
+        }
+        return dummy->next;
+    }
+};
+   

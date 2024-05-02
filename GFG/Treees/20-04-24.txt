@@ -1,0 +1,224 @@
+Given a binary tree of size n, you have to count the number of nodes in it. For example, the count of nodes in the tree below is 4.
+
+        1
+     /      \
+   10      39
+  /
+5
+
+Example 1:
+Input:
+1 2 3
+Output:
+3
+Explanation:
+Given Tree is :
+                              1
+                             /  \
+                            2   3
+There are 3 nodes in the tree.
+
+Example 2:
+Input:
+10 5 9 N 1 3 6 
+Output:
+6
+Explanation:
+Given Tree is :
+                              10
+                             /  \
+                           5     9
+                            \    / \
+                             1 3   6
+There are 6 nodes in the tree.
+
+User Task:
+You don't need to read input or print anything. Your task is to complete the function getSize() which takes the tree head node and returns an integer representing the number of nodes in the tree.
+
+int c = 0;
+ void preorder(struct Node* root) {
+      if(root == NULL) return;
+        c++;
+        preorder(root->left);
+        preorder(root->right);
+ }
+class Solution {
+  public:
+    int getSize(Node* root) {
+        // code here
+         c = 0;
+       preorder(root);
+        return c;
+    }
+};
+
+Given a Binary Tree of size N, your task is to complete the function sumBt(), that should return the sum of all the nodes of the given binary tree.
+
+Input:
+
+First line of input contains the number of test cases T. For each test case, there will be two lines:
+
+    First line of each test case will be an integer N denoting the number of parent child relationships.
+
+    Second line of each test case will print the level order traversal of the tree in the form of N space separated triplets. The description of triplets is as follows:
+
+        Each triplet will contain three space-separated elements of the form (int, int char).
+
+        The first integer element will be the value of parent. 
+
+        The second integer will be the value of corresponding left or right child. In case the child is null, this value will be -1.
+
+        The third element of triplet which is a character can take any of the three values ‘L’, ‘R’ or ‘N’. L denotes that the children is a left child, R denotes that the children is a Right Child and N denotes that the child is NULL.
+         
+
+Please note that the relationships are printed only for internal nodes and not for leaf nodes.
+
+Output:
+The function should return the sum of all the nodes of the binary tree.
+
+User Task:
+As it is a functional problem. So, you don't need to worry about the input you just have to complete the function sumBT() that takes a node as a parameter and returns the sum of all the nodes.
+
+Constraints:
+1<=T<=100
+1<=N<=100
+
+Example:
+Input:
+2
+2
+1 2 L 1 -1 N
+6
+1 2 L 1 3 R 2 -1 N 2 -1 N 3 3 L 3 -1 N
+Output:
+3
+9
+
+
+int sum = 0;
+void preorder(struct Node* root) {
+    if(root == NULL) return;
+    sum+=root->key;
+    preorder(root->left);
+    preorder(root->right);
+}
+long int sumBT(Node* root)
+{
+    // Code here
+    sum = 0;
+    preorder(root);
+    return sum;
+}
+
+Given a Binary Heap of size N in an array arr[]. Write a program to calculate the height of the Heap.
+
+Note: Return 1 if the N is 1.
+
+Example 1:
+
+Input: N = 6
+arr = {1, 3, 6, 5, 9, 8}
+Output: 2
+Explaination: The tree is like the following
+           (1)
+       /   \
+    (3)    (6)
+    / \     /
+  (5) (9) (8)
+
+Example 2:
+
+Input: N = 9
+arr = {3, 6, 9, 2, 15, 10, 14, 5, 12}
+Output: 3
+Explaination: The tree looks like following
+               (2)
+        /      \
+      (3)      (9)
+     /  \     /   \
+   (5) (15) (10) (14)
+   / \
+ (6) (12)
+
+Your Task:
+You do not need to read input or print anything. Your task is to complete the function heapHeight() which takes the value N and the array arr as input parameters and returns the height of the heap.
+
+
+Given a Binary Heap of size N in an array arr[]. Write a program to calculate the height of the Heap.
+
+Note: Return 1 if the N is 1.
+
+Example 1:
+
+Input: N = 6
+arr = {1, 3, 6, 5, 9, 8}
+Output: 2
+Explaination: The tree is like the following
+           (1)
+       /   \
+    (3)    (6)
+    / \     /
+  (5) (9) (8)
+
+Example 2:
+
+Input: N = 9
+arr = {3, 6, 9, 2, 15, 10, 14, 5, 12}
+Output: 3
+Explaination: The tree looks like following
+               (2)
+        /      \
+      (3)      (9)
+     /  \     /   \
+   (5) (15) (10) (14)
+   / \
+ (6) (12)
+
+Your Task:
+You do not need to read input or print anything. Your task is to complete the function heapHeight() which takes the value N and the array arr as input parameters and returns the height of the heap.
+
+Given the root of a Binary Search Tree. The task is to find the minimum valued element in this given BST.
+
+Example 1:
+
+Input:
+           5
+         /    \
+        4      6
+       /        \
+      3          7
+     /
+    1
+Output: 1
+
+Example 2:
+
+Input:
+             9
+              \
+               10
+                \
+                 11
+Output: 9
+
+Your Task:
+The task is to complete the function minValue() which takes root as the argument and returns the minimum element of BST. If the tree is empty, there is no minimum element, so return -1 in that case.
+
+
+class Solution {
+  public:
+  int m= 10000;
+void preorder(struct Node* root) {
+    if(root == NULL) return ;
+    if(root->data < m) m = root->data;
+    preorder(root->left);
+    preorder(root->right);
+}
+    int minValue(Node* root) {
+        // Code here
+        if(root == NULL) return -1;
+     
+        preorder(root);
+        return m;
+    }
+};

@@ -1,0 +1,91 @@
+Given a singly linked list having n nodes, your task is to remove every kth node from the linked list. 
+
+Example 1:
+
+Input:
+n = 8
+linked list: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 
+k = 2
+Output: 
+1 -> 3 -> 5 -> 7
+Explanation: 
+After removing every 2nd node of the linked list, the resultant linked list will be: 1 -> 3 -> 5 -> 7.
+
+
+
+class Solution {
+public:
+    Node* deleteK(Node *head, int K) {
+        //Your code here
+        struct Node *temp = head, *prev;
+        while (temp != NULL) {
+            // Skip K-1 nodes
+            int i;
+            for (i = 1; i < K && temp != NULL; i++) {
+                prev = temp;
+                temp = temp->next;
+            }
+            
+            if (temp == NULL) 
+                break;
+            
+            if (temp == head) { 
+                head = temp->next;
+                free(temp);
+                temp = head;
+            } else {
+                prev->next = temp->next;
+                free(temp);
+                temp = prev->next;
+            }
+        }
+        return head;
+    }
+};
+Given a singly linked list of N nodes. Find the first node of the loop if the linked list has a loop. If a loop is present return the node data of the first node of the loop else return -1.
+
+Example 1:
+
+Input:
+
+Output: 3
+Explanation:
+We can see that there exists a loop 
+in the given linked list and the first
+node of the loop is 3.
+
+class Solution
+{
+    public:
+     //Function to find first node if the linked list has a loop.
+    int findFirstNode(Node* head)
+    {
+        // your code here
+       struct Node *slow = head, *fast = head;
+
+    // Detecting loop using Floyd's Cycle Detection Algorithm
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) {
+            // Loop detected, break the loop
+            break;
+        }
+    }
+
+    // If no loop is present, return -1
+    if (fast == NULL || fast->next == NULL) {
+        return -1;
+    }
+
+    // Reset slow pointer to the head and keep fast at the meeting point
+    slow = head;
+    while (slow != fast) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    // The point where slow and fast meet again is the first node of the loop
+    return slow->data;
+    }
+};

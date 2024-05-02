@@ -1,0 +1,227 @@
+Given a singly linked list. The task is to find the length of the linked list, where length is defined as the number of nodes in the linked list.
+
+Example 1:
+
+Input:
+LinkedList: 1->2->3->4->5
+Output: 5
+Explanation: Count of nodes in the 
+linked list is 5, which is its length.
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+    
+}*start;
+
+void insert();
+void display(struct Node *head);
+//struct Node *start;
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+      start=NULL;
+      insert();
+      printf("%d",getCount(start));
+      printf("\n");
+    }
+    return 0;
+
+}
+
+
+ void insert()
+ {
+     int n,value,i;
+     scanf("%d",&n);
+     struct Node *temp;
+     for(i=0;i<n;i++)
+     {
+         scanf("%d",&value);
+         if(i==0)
+         {
+              start=(struct Node *) malloc( sizeof(struct Node) );
+              start->data=value;
+              start->next=NULL;
+              temp=start;
+              continue;
+         }
+         else
+         {
+             temp->next= (struct Node *) malloc( sizeof(struct Node) );
+             temp=temp->next;
+             temp->data=value;
+             temp->next=NULL;
+         }
+     }
+ }
+
+// } Driver Code Ends
+
+
+//User function Template for C
+
+int getCount(struct Node* head)
+    {
+        int count =0;
+        struct Node *temp;
+        temp = head;
+        if(temp == NULL) return count;
+        else{
+        while(temp != NULL){
+            temp=temp->next;
+            count++;
+        }
+        }
+        return count;
+    }
+
+
+
+Given head, the head of a singly linked list, find if the linked list is circular or not. A linked list is called circular if it not NULL terminated and all nodes are connected in the form of a cycle. An empty linked list is considered as circular.
+
+Note: The linked list does not contains any inner loop.
+
+Example 1:
+
+Input:
+LinkedList: 1->2->3->4->5
+(the first and last node is connected,
+i.e. 5 --> 1)
+Output: 1
+
+bool isCircular(struct Node *head) {
+    if (head == NULL) return false;
+
+    struct Node *slow = head;
+    struct Node *fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        if (slow == fast || slow == fast->next) {
+            return true;
+        }
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return false;
+}
+
+//{ Driver Code Starts.
+
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		int n, k;
+		scanf("%d", &n);
+		scanf("%d", &k);
+		int first;
+		scanf("%d", &first);
+		struct Node *head;
+		head = (struct Node *) malloc(sizeof(struct Node));
+		head->data = first;
+		head->next = NULL;
+		struct Node *tail = head;
+
+		for (int i = 1; i < n; ++i)
+		{
+			int data;
+			scanf("%d", &data);
+			struct Node *temp;
+			temp = (struct Node *) malloc(sizeof(struct Node));
+			temp->data = data;
+			temp->next = NULL;
+			tail->next = temp;
+			tail = tail->next;
+		}
+
+        if (k==1 && n >= 1)
+            tail->next = head;
+		
+		printf("%d\n", isCircular(head));
+	}
+	return 0;
+}
+// } Driver Code Ends
+Given a linked list of size N and a key. The task is to insert the key in the middle of the linked list.
+
+Example 1:
+
+Input:
+LinkedList = 1->2->4
+key = 3
+Output: 1 2 3 4
+Explanation: The new element is inserted
+after the current middle element in the
+linked list.
+
+struct Node* insertInMiddle(struct Node* head, int x)
+{
+    //code here
+    int pos,i=1,count = 0;
+    struct Node *temp=head;
+    while(temp!=NULL){
+        temp=temp->next;
+        count++;
+    }
+    if(count%2==0) pos = count/2;
+    else pos = (count/2) + 1;
+    temp = head;
+    while(i<pos) {
+        temp = temp->next;
+        i++;
+    }
+    struct Node *newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode->data = x;
+    newnode->next = temp->next;
+    temp->next = newnode;
+    return head;
+    
+    
+}
+Given two Singly Linked List of N and M nodes respectively. The task is to check whether two linked lists are identical or not. 
+Two Linked Lists are identical when they have same data and with same arrangement too.
+
+Example 1:
+
+Input:
+LinkedList1: 1->2->3->4->5->6
+LinkedList2: 99->59->42->20
+Output: Not identical
+
+bool areIdentical(struct Node *head1, struct Node *head2)
+{
+	//code here
+	struct Node *temp1,*temp2;
+	temp1 = head1;
+	temp2= head2;
+	int count1 = 0 , count2 = 0;
+	while(temp1 != NULL) {
+	    temp1 = temp1->next;
+	    count1++;
+	}
+	while(temp2 != NULL) {
+	    temp2= temp2->next;
+	    count2++;
+	}
+	if(count1 != count2) return false;
+		temp1 = head1;
+	temp2= head2;
+	while(temp1 !=NULL && temp2 != NULL){
+	    if(temp1->data != temp2->data) return false;
+	    temp1 = temp1->next;
+	    temp2 = temp2->next;
+	}
+	return true;
+}

@@ -1,0 +1,235 @@
+Given a singly linked list and a number k. Write a function to find the (N/k)th element, where N is the number of elements in the list. We need to consider ceil value in case of decimals.
+
+Input:
+The first line of input contains an integer T denoting the number of test cases. The first line of each test case consists of an integer N. The second line consists of N spaced integers.The last line consists of an integer k.
+
+Output:
+return the data value of (N/k)th node in the Linked List.
+
+User Task:
+The task is to complete the function fractional_node() which should find the n/kth node in the linked list and return its data value.
+
+int fractional_node(struct Node *head, int k)
+{
+    // your code here
+     if (head == NULL || k <= 0) {
+        // printf("Error: Invalid input.\n");
+        return NULL; // Error code indicating invalid input
+    }
+
+    // Step 1: Count the number of nodes
+    struct Node *temp = head;
+    int count = 0;
+    while (temp != NULL) {
+        temp = temp->next;
+        count++;
+    }
+
+    // Step 2: Calculate the position of the (N/k)th node
+    int position = ceil((double)count / k);
+
+    // Step 3: Traverse to the calculated position and return its data value
+    temp = head;
+    for (int i = 1; i < position && temp != NULL; i++) {
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        // printf("Error: Unable to find the fractional node.\n");
+        return NULL; // Error code indicating unable to find the node
+    }
+
+    return temp->data;
+}
+Given a single linked list of size N, calculate the sum of the last M nodes.
+
+Example 1:
+
+Input:
+N = 6, M = 3
+5 9 6 3 4 10
+Output:
+17
+Explanation:
+Sum of last three nodes in the linked list is 3 + 4 + 10 = 17.
+
+int sumOfLastN_Nodes(struct Node* head, int n)
+{
+      // Code here
+      if(head == NULL || n<=0){
+          return NULL;
+      }
+      struct Node* temp =head;
+      int size =0;
+      while(temp!=NULL){
+          temp=temp->next;
+          size++;
+      }
+      int pos = size - n;
+      temp = head;
+      for(int i =0;i<pos && temp != NULL ;i++){
+          temp = temp->next;
+      }
+      int sum = 0;
+      while(temp!=NULL) {
+          sum = sum+temp->data;
+          temp=temp->next;
+      }
+     
+      return sum;
+      
+}
+
+Given a linked list of N nodes. The task is to check if the linked list has a loop. Linked list can contain self loop.
+
+Example 1:
+
+Input:
+N = 3
+value[] = {1,3,4}
+x(position at which tail is connected) = 2
+Output: True
+Explanation: In above test case N = 3.
+The linked list with nodes N = 3 is
+given. Then value of x=2 is given which
+means last node is connected with xth
+node of linked list. Therefore, there
+exists a loop.
+
+class Solution
+{
+    public:
+    //Function to check if the linked list has a loop.
+    bool detectLoop(Node* head)
+    {
+        // your code here
+        struct Node* slow = head;
+        struct Node* fast = head;
+       while(fast != NULL && fast->next != NULL) {
+           slow = slow->next;
+           fast = fast->next->next;
+          if(slow == fast) return true; 
+       }
+       return false;
+    }
+    
+};
+
+
+Given a linked list consisting of L nodes and given a number N. The task is to find the Nth node from the end of the linked list.
+
+Example 1:
+
+Input:
+N = 2
+LinkedList: 1->2->3->4->5->6->7->8->9
+Output: 8
+Explanation: In the first example, there
+are 9 nodes in linked list and we need
+to find 2nd node from end. 2nd node
+from end is 8.
+
+class Solution{
+public:
+    int getNthFromLast(Node *head, int n)
+    {
+           // Your code here
+           struct Node* temp =head;
+           int size = 0;
+           while(temp != NULL) {
+               temp = temp->next;
+               size++;
+           }
+           if(n>size) return -1;
+           int pos = size - (n-1);
+           int i=1;
+           temp = head;
+           while(i<pos){
+               temp = temp->next;
+               i++;
+           }
+           return temp->data;
+    }
+};
+
+
+Given a singly linked list of N nodes.
+The task is to find the middle of the linked list. For example, if the linked list is
+1-> 2->3->4->5, then the middle node of the list is 3.
+If there are two middle nodes(in case, when N is even), print the second middle element.
+For example, if the linked list given is 1->2->3->4->5->6, then the middle node of the list is 4.
+
+Example 1:
+
+Input:
+LinkedList: 1->2->3->4->5
+Output: 3 
+Explanation: 
+Middle of linked list is 3.
+Example 2: 
+
+Input:
+LinkedList: 2->4->6->7->5->1
+Output: 7 
+Explanation: 
+Middle of linked list is 7.
+
+
+class Solution{
+    public:
+    /* Should return data of middle node. If linked list is empty, then  -1*/
+    int getMiddle(Node *head)
+    {
+        // Your code here
+        struct Node *temp =head;
+        int size = 0;
+        while(temp != NULL){
+            temp = temp->next;
+            size++;
+        }
+        
+            int i=1;
+            temp = head;
+            int pos = size / 2;
+            while(i<=pos){
+                temp=temp->next;
+                i++;
+            }
+            return temp->data;
+        
+        
+    }
+};
+
+Given a linked list of N nodes. The task is to reverse this list.
+
+Example 1:
+
+Input:
+LinkedList: 1->2->3->4->5->6
+Output: 6 5 4 3 2 1
+Explanation: After reversing the list, 
+elements are 6->5->4->3->2->1.
+
+class Solution
+{
+    public:
+    //Function to reverse a linked list.
+    struct Node* reverseList(struct Node *head)
+    {
+        // code here
+        // return head of reversed list
+        struct Node* curr,*prev,*nextnode;
+        prev = NULL;
+        curr = nextnode = head;
+        while(nextnode!=NULL){
+            nextnode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextnode;
+        }
+        head = prev;
+        return head;
+    }
+    
+};

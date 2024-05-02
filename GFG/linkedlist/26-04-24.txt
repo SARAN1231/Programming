@@ -1,0 +1,47 @@
+Given two linked lists of length n and m, the task is to complete the function findIntersection(), which returns the intersection of two linked lists. Each of the two linked lists contains distinct node values.
+
+Example 1:
+
+Input:
+n = 6, m = 4
+LinkedList1: 9->6->4->2->3->8
+LinkedList2: 1->2->8->6
+Output: 6 2 8
+Explanation: Nodes 6, 2 and 8 are common in both of the lists and the order will be according toLinkedList1. 
+
+
+
+class Solution{
+  public:
+
+    Node* findIntersection(Node* head1, Node* head2)
+    {
+        // code here
+        // return the head of intersection list
+       
+        int hash[100000] = {0};
+        struct Node* temp = head2;
+        while(temp != NULL) {
+            hash[temp->data] = 1;
+            temp=temp->next;
+        }
+        temp = head1;
+        struct Node* head = NULL;
+        struct Node* tail = NULL; 
+        while(temp != NULL) {
+            if(hash[temp->data] == 1) {
+               struct Node* newnode = (struct Node *) malloc(sizeof(struct Node));
+               newnode->data = temp->data;
+               if(head == NULL){
+                   head = tail = newnode;
+               }
+               else {
+                   tail->next = newnode;
+                   tail = newnode;
+               }
+            }
+            temp = temp->next;
+        }
+        return head;
+    }
+};

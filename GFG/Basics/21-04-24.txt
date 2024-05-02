@@ -1,0 +1,116 @@
+Given an array Arr of N positive integers. Your task is to find the elements whose value is equal to that of its index value ( Consider 1-based indexing ).
+
+Note: There can be more than one element in the array which have the same value as its index. You need to include every such element's index. Follows 1-based indexing of the array.
+
+Example 1:
+
+Input:
+N = 5
+Arr[] = {15, 2, 45, 12, 7}
+Output: 2
+Explanation: Only Arr[2] = 2 exists here.
+Example 2:
+
+Input: 
+N = 1
+Arr[] = {1}
+Output: 1
+Explanation: Here Arr[1] = 1 exists.
+
+class Solution {
+    ArrayList<Integer> valueEqualToIndex(int arr[], int n) {
+        // code here
+       ArrayList<Integer> b = new ArrayList<>();
+        for (int i =0;i<n;i++) {
+            if(arr[i] ==i+1){
+               b.add(i+1);
+            }
+        }
+        return b;
+    }
+}
+
+
+You are given an array A of size N. You need to print elements of A in alternate order (starting from index 0).
+
+Example 1:
+
+Input:
+N = 4
+A[] = {1, 2, 3, 4}
+Output:
+1 3
+Example 2:
+
+Input:
+N = 5
+A[] = {1, 2, 3, 4, 5}
+Output:
+1 3 5
+
+
+class GfG
+{
+    public static void print(int arr[], int n)
+    {
+        // your code here
+        for(int i =0;i<n;i=i+2) {
+            System.out.print(arr[i]+ " " );
+        }
+    }
+}
+
+Print numbers from 1 to N without the help of loops.
+
+Example 1:
+
+Input:
+N = 10
+Output: 1 2 3 4 5 6 7 8 9 10
+
+Example 2:
+
+Input:
+N = 5
+Output: 1 2 3 4 5
+
+
+class Solution
+{
+    
+  public void printNos(int N)
+    {
+        //Your code here
+        if(N>0) {
+                printNos(N-1);
+                System.out.print(N+" ");
+        }
+    }
+}
+
+
+class GfG
+{
+	public static int palinArray(int[] a, int n)
+           {
+                  //add code here.
+                  int flag = 1;
+                  for(int i =0;i<n;i++){
+                      int temp = a[i];
+                      int sum = 0;
+                      while(a[i] > 0) {
+                          int rem = a[i]%10;
+                          sum = rem + (sum*10);
+                          a[i]/=10;
+                      }
+                      if(temp != sum) {
+                          flag = 0;
+                          return flag;
+                      }
+                     
+                  }
+                  return flag;
+                  
+               
+           }
+}
