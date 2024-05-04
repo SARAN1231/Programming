@@ -1,0 +1,57 @@
+#include<stdlib.h>
+#include <stdio.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *top = NULL;
+void push() {
+    int n;
+    struct node* newnode;
+    newnode = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the element");
+    scanf("%d",&n);
+    newnode->data = n;
+    newnode->next  = top;
+    top = newnode;
+}
+
+void display() {
+    struct node *temp = top;
+    while(temp != NULL) {
+        printf("%d ",temp->data);
+        temp = temp->next;
+    }
+}
+
+void peek() {
+    if(top == NULL) printf("Empty");
+    else{
+        printf("peek - %d \n",top->data);
+    }
+}
+
+void pop() {
+    if(top == NULL) printf("underflow");
+    struct node *temp = top;
+    printf("%d is popped\n",top->data);
+    
+    top = top->next;
+    free(temp);
+}
+int main()
+{
+    push();
+    push();
+    push();
+    push();
+     peek();
+     pop();
+     pop();
+     peek();
+    display();
+
+    return 0;
+}

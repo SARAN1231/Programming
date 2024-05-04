@@ -1,0 +1,54 @@
+#include<stdio.h>
+#define N 5
+   int stack[N];
+    int top =-1;
+    int n;
+    
+    void push() {
+        printf("Enter a element to push :");
+        scanf("%d",&n);
+        if(top == N-1) {
+            printf("Overflow");
+        }
+        else{
+            top++;
+            stack[top] = n;
+        }
+    }
+    
+    void pop() {
+        if(top ==-1) printf("underflow");
+        else {
+            int item = stack[top];
+            top--;
+            printf("\n%d is popped\n",item);
+        }
+    }
+    
+    void peek() {
+        if(top == -1) {
+            printf("underflow");
+        }
+        else {
+            printf("peek - %d",stack[top]);
+        }
+    }
+    
+    void display() {
+        for(int i =0;i<=top;i++){
+            printf("%d ",stack[i]);
+        }
+    }
+    int main() {
+    push();
+    push();
+    push();
+    push();
+    peek();
+    pop();
+    pop();
+    pop();
+    pop();
+    pop();
+    display();
+    }

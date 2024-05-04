@@ -1,0 +1,125 @@
+Write a program to implement a Stack using Array. Your task is to use the class as shown in the comments in the code editor and complete the functions push() and pop() to implement a stack. 
+
+Example 1:
+
+Input: 
+push(2)
+push(3)
+pop()
+push(4) 
+pop()
+Output: 3, 4
+Explanation: 
+push(2)    the stack will be {2}
+push(3)    the stack will be {2 3}
+pop()      poped element will be 3,
+           the stack will be {2}
+push(4)    the stack will be {2 4}
+pop()      poped element will be 4
+Example 2:
+
+Input: 
+pop()
+push(4)
+push(5)
+pop()
+Output: -1, 5
+
+
+void push(struct Stack* stack, int item)
+{
+    //code here
+    stack->top = stack->top +1;
+    stack->array[stack->top] = item;
+    
+}
+
+
+//Function to remove an item from top of the stack.
+int pop(struct Stack* stack)
+{
+    //code here
+    
+    if(stack->top == -1) return -1;
+    else {
+        int data = stack->array[stack->top];
+        stack->top = stack->top - 1;
+        return data;
+    }
+    
+}
+
+Given an integer array Arr of size N. For each element in the array, check whether the right adjacent element (on the next immediate position) of the array is smaller. If next element is smaller, update the current index to that element. If not, then  -1.
+
+Example 1:
+
+Input:
+N = 5
+Arr[] = {4, 2, 1, 5, 3}
+Output:
+2 1 -1 3 -1
+Explanation: Array elements are 4, 2, 1, 5
+3. Next to 4 is 2 which is smaller, so we
+print 2. Next of 2 is 1 which is smaller,
+so we print 1. Next of 1 is 5 which is
+greater, so we print -1. Next of 5 is 3
+which is smaller, so we print 3.  Note
+that for last element, output is always 
+going to be -1 because there is no element
+on right.
+
+
+class Solution{
+public:	
+    
+	void immediateSmaller(vector<int>&arr, int n) {
+	    //  code here
+	    
+	    for(int i=0;i<n-1;i++){
+	        if(arr[i+1] < arr[i]) {
+	            arr[i] = arr[i+1];
+	        }
+	        else{
+	            arr[i] = -1;
+	        }
+	    }
+	    
+	    arr[n-1] = -1;
+	}
+
+};
+
+
+You are given an array arr of size N. You need to push the elements of the array into a stack and then print them while popping.
+
+Example 1:
+
+Input:
+n = 5
+arr = {1 2 3 4 5}
+Output:
+5 4 3 2 1
+Example 2: 
+
+Input: 
+n = 7
+arr = {1 6 43 1 2 0 5}
+Output: 
+5 0 2 1 43 6 1
+
+
+
+stack<int> _push(int arr[], int n) {
+    stack<int> s;
+    for(int i = 0; i < n; i++) {
+        s.push(arr[i]);
+    }
+    return s;
+}
+
+void _pop(stack<int> s) {
+    while (!s.empty()) {
+        cout << s.top() << " ";
+        s.pop();
+    }
+}
