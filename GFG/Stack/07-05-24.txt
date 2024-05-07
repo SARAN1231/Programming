@@ -1,0 +1,81 @@
+
+
+#include <stdio.h>
+#define max 100
+  int top = -1;
+  int arr[max];
+  
+  
+void push(int N) {
+    int n;
+    printf("enter a element");
+    scanf("%d",&n);
+    if(top ==N-1 ) printf("overflow");
+    else {
+        top++;
+        arr[top] = n;
+    }
+}
+
+void display() {
+    for(int i =0;i<=top;i++) {
+        printf("%d ",arr[i]);
+    }
+}
+
+void delarr(int N,int k) {
+    int count =0;
+    
+    for( int i = 0;i<N-1;i++){
+        if(count == k) break;
+        if(arr[i]<arr[i+1]){
+            for(int j=i;j<N-1;j++){
+                arr[j] = arr[j+1];
+            }
+           
+            i=-1;
+            N--;
+            count++;
+        }
+        
+    }
+    top = N -1;
+}
+int main()
+{
+     int N,K;
+     printf("N");
+    scanf("%d",&N);
+      printf("K");
+    scanf("%d",&K);
+    push(N);
+    push(N);
+    push(N);
+    
+    display();
+     delarr(N,K);
+     printf("\n");
+     display();
+}
+
+
+You are given a string S, the task is to reverse the string using stack.
+
+ 
+
+Example 1:
+
+
+Input: S="GeeksforGeeks"
+Output: skeeGrofskeeG
+
+char* reverse(char *s, int len)
+{
+    //code here
+    char *rev = (char *)malloc((len+1)*sizeof(char));
+    for(int i =0;i<len;i++){
+        rev[i] = s[len-i-1];
+    }
+    
+    return rev;
+}
