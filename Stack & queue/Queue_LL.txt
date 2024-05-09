@@ -1,0 +1,67 @@
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+struct node* front =NULL;
+struct node* rear =NULL;
+
+void enqueue() {
+   struct node *newnode;
+   newnode = (struct node *)malloc(sizeof(struct node*));
+   int n;
+   printf("Enter the element");
+   scanf("%d",&n);
+   newnode->data = n;
+   newnode->next = NULL;
+   if(front == NULL && rear == NULL) {
+       front = rear = newnode;
+   }
+   else{
+       rear->next = newnode;
+       rear = newnode;
+   }
+}
+
+void dequeue() {
+    if(front == NULL && rear == NULL) {
+       printf("Empty");
+    }
+    else {
+        struct node* temp = front;
+        front = front->next;
+        free(temp);
+    }
+}
+void peek(){
+     if(front == NULL && rear == NULL) {
+       printf("Empty");
+    }
+    else printf("peek -> %d\n",front->data);
+}
+
+void display() {
+   struct node* temp = front;
+   while(temp!= NULL) {
+       printf("%d ",temp->data);
+       temp = temp->next;
+   }
+    printf("\n");
+}
+int main()
+{
+    enqueue();
+    enqueue();
+    enqueue();
+    enqueue();
+    enqueue();
+    display();
+    dequeue();
+    display();
+    peek();
+    display();
+}
