@@ -1,0 +1,73 @@
+
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct stack{
+    int data;
+    struct stack* next;
+};
+
+
+struct stack* top1 = NULL;
+struct stack* top2 = NULL;
+
+
+void enqueue(int k) {
+    struct stack* newnode;
+    newnode = (struct stack*)malloc(sizeof(struct stack));
+    newnode->data = k;
+    newnode->next = top1;
+    top1 = newnode;
+}
+void dequeue() {
+   if(top1 == NULL && top2 == NULL) {
+      printf("Queue is empty\n");
+       return;
+   }
+   if(top2 == NULL) {
+       while(top1 != NULL){
+           struct stack* newnode;
+            newnode = (struct stack*)malloc(sizeof(struct stack));
+            newnode->data = top1->data;
+            newnode->next = top2;
+            top2 = newnode;
+           top1 = top1->next;
+       }
+   }
+   printf("%d dequeued element\n",top2->data);
+   struct stack* temp = top2;
+   top2 = top2->next;
+   free(temp);
+}
+
+void display() {
+    struct stack* temp = top1;
+    while(temp != NULL){
+        printf("%d ",temp->data);
+        temp = temp->next;
+    }
+    struct stack* temp1 = top2;
+    while(temp1 != NULL){
+        printf("%d ",temp1->data);
+        temp1 = temp1->next;
+    }
+    printf("\n");
+}
+int main()
+{
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    display();
+    dequeue();
+    dequeue();
+    display();
+    enqueue(4);
+    enqueue(5);
+    display();
+    dequeue();
+    dequeue();
+    display();
+    
+}

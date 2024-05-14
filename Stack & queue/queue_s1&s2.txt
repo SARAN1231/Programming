@@ -1,0 +1,66 @@
+
+
+#include <stdio.h>
+#define N1 3
+int s1[N1];
+int s2[N1];
+int top1 = -1;
+int top2 = -1;
+
+void enqueue() {
+     if(top1 == N1-1) {
+        printf("Overflow\n");
+        return;
+    }
+    int n;
+    printf("Enter the Element");
+    scanf("%d",&n);
+    top1++;
+    s1[top1] = n;
+}
+
+void dequeue() {
+    if (top1 == -1 && top2 == -1) {
+        printf("-1\n");
+        return;
+    }
+    if(top2 == -1) {
+        int j = top1;
+        for(int i=j;i>=0;i--){
+            
+            s2[++top2] = s1[i];
+            top1--;
+            
+        }
+    }
+    
+  
+    printf("dequeued elemnt -> %d\n",s2[top2]);
+    top2--;
+}
+
+void peek(){
+    if(top1 == -1) printf("underflow");
+    printf("peek->%d\n",s1[top1]);
+}
+
+void display(){
+    for(int i=0;i<=top1;i++){
+        printf("%d ",s1[i]);
+    }
+    printf("\n");
+}
+
+
+int main()
+{
+    enqueue();
+    enqueue();
+    display();
+    dequeue();
+    display();
+    enqueue();
+    display();
+    dequeue();
+    
+}
