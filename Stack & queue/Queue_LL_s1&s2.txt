@@ -1,4 +1,25 @@
+Algorithm to implement a queue using two stacks:
 
+Data Structures:
+
+Stack s1 (main stack for enqueue operation)
+Stack s2 (auxiliary stack for dequeue operation)
+Enqueue Operation:
+
+Input: element x
+Push x onto s1
+Dequeue Operation:
+
+If both s1 and s2 are empty, return an error (Queue is empty)
+If s2 is empty, transfer all elements from s1 to s2
+Pop each element from s1 and push it onto s2
+Pop the top element from s2 and return it as the dequeued element
+Peek Operation (Front Operation):
+
+If both s1 and s2 are empty, return an error (Queue is empty)
+If s2 is empty, transfer all elements from s1 to s2
+Pop each element from s1 and push it onto s2
+Peek at the top element of s2 and return it as the front element of the queue
 
 #include <stdio.h>
 #include<stdlib.h>

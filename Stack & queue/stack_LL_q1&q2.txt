@@ -1,0 +1,122 @@
+
+// Algorithm to implement a stack using two queues:
+// -------------------------------------------------
+
+// Data Structures:
+// - Queue q1, q2
+
+// Push Operation:
+// - Input: element x
+// - Enqueue x into q1
+
+// Pop Operation:
+// - Dequeue all elements from q1 except the last one and enqueue them into q2
+// - Dequeue the last element from q1 and return it
+// - Swap the names of q1 and q2
+
+// Top Operation:
+// - Peek at the front of q1 to get the top element of the stack
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct queue{
+    int data;
+    struct queue* next;
+};
+
+struct queue* front1 = NULL;
+struct queue* rear1 = NULL;
+struct queue* front2 = NULL;
+struct queue* rear2 = NULL;
+
+void push(int x){
+    
+    struct queue* newnode = (struct queue*)malloc(sizeof(struct queue));
+    newnode->data = x;
+    newnode->next = NULL;
+    if(front1 == NULL && rear1 == NULL){
+        front1 = rear1 = newnode;
+    }
+    else{
+        rear1->next = newnode;
+        rear1 = newnode;
+    }
+}
+
+
+void pop() {
+    if (front1 == NULL) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    struct queue* temp = front1;
+    struct queue* prev = NULL;
+
+   
+    while (temp->next != NULL ) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+
+    if (prev == NULL) {
+        printf("%d popped", temp->data);
+        free(temp);
+        
+    } else {
+       
+        while (front1 != NULL && front1 != temp) {
+            struct queue* newnode = (struct queue*)malloc(sizeof(struct queue));
+            newnode->data = front1->data;
+            newnode->next = NULL;
+            
+            if (front2 == NULL) {
+                front2 = rear2 = newnode;
+            } else {
+                rear2->next = newnode;
+                rear2 = newnode;
+            }
+            
+            front1 = front1->next;
+        }
+
+        
+        printf("%d popped \n", temp->data);
+
+        free(temp);
+        front1 = rear1 = NULL;
+        
+        struct queue* temp_front = front1;
+    struct queue* temp_rear = rear1;
+    front1 = front2;
+    rear1 = rear2;
+    front2 = temp_front;
+    rear2 = temp_rear;
+       
+    }
+}
+
+void display(){
+    struct queue* temp = front1;
+    while(temp != NULL){
+        printf("%d ",temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+int main(){
+  push(2);
+push(3);
+display();
+pop();
+display();
+push(4);
+display();
+pop();
+display();
+}
