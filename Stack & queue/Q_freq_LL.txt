@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct queue{
+    int data;
+    struct queue* next;
+};
+
+struct queue* front = NULL;
+struct queue* rear = NULL;
+
+
+void push(int x){
+    struct queue* newnode;
+    newnode = (struct queue*)malloc(sizeof(struct queue));
+    newnode->data = x;
+    newnode->next = NULL;
+    if(front == NULL){
+        front = rear = newnode;
+    }
+    else{
+        rear->next = newnode;
+        rear = newnode;
+    }
+}
+
+void display(){
+    struct queue* temp = front;
+    while(temp != NULL){
+        printf("%d ",temp->data);
+        temp = temp->next;
+    }
+}
+
+int freq(int x){
+    struct queue* temp = front;
+    int count =0;
+    while(temp != NULL){
+        if(temp->data == x) count++;
+        temp = temp->next;
+    }
+    if(count ==0) return -1;
+    else return count;
+    
+}
+int main(){
+    
+    int N;
+    scanf("%d ",&N);
+    int n;
+    for(int i=0;i<N;i++){
+        scanf("%d",&n);
+        push(n);
+    }
+    int M;
+    scanf("%d ",&M);
+    int m;
+    for(int i=0;i<M;i++){
+        scanf("%d",&m);
+       printf("count is %d\n",freq(m));
+    }
+   
+}

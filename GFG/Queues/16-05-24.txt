@@ -1,0 +1,85 @@
+class Queues
+{
+    Queue<Integer> q1 = new LinkedList<Integer>();
+    Queue<Integer> q2 = new LinkedList<Integer>();
+    
+    //Function to push an element into stack using two queues.
+    void push(int a)
+    {
+	    // Your code here	
+	    q1.add(a);
+    }
+    
+    //Function to pop an element from stack using two queues. 
+    int pop()
+    {
+	    // Your code here
+	    if(q1.isEmpty() && q2.isEmpty()) return -1;
+	    while(q1.size()>1){
+	        q2.add(q1.poll());
+	    }
+	    int poped = q1.poll();
+	    Queue<Integer> temp = q1;
+	    q1 = q2;
+	    q2 = temp;
+	    return poped;
+    }
+	
+}
+
+
+
+
+
+class twoStacks {
+    int size;
+    int top1, top2;
+    int[] arr;
+
+    twoStacks() {
+        size = 100;
+        arr = new int[size];
+        top1 = -1;
+        top2 = size;
+    }
+
+    // Function to push an integer into stack1.
+    void push1(int x) {
+        if (top1 < top2 - 1) {
+            top1++;
+            arr[top1] = x;
+        }
+    }
+
+    // Function to push an integer into stack2.
+    void push2(int x) {
+        if (top1 < top2 - 1) {
+            top2--;
+            arr[top2] = x;
+        } 
+    }
+
+    // Function to remove an element from top of stack1.
+    int pop1() {
+        if (top1 >= 0) {
+            int x = arr[top1];
+            top1--;
+            return x;
+        } else {
+            
+            return -1;
+        }
+    }
+
+    // Function to remove an element from top of stack2.
+    int pop2() {
+        if (top2 < size) {
+            int x = arr[top2];
+            top2++;
+            return x;
+        } else {
+            
+            return -1;
+        }
+    }
+}

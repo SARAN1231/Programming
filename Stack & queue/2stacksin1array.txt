@@ -1,0 +1,67 @@
+Implement two stacks in an array
+
+
+
+#include<stdio.h>
+#define N 6
+
+int arr[N];
+int top1 = -1;
+int top2 = N;
+void push1(int x){
+    if(top1 +1 >= top2) printf("Overflow");
+    top1++;
+    arr[top1] = x;
+}
+
+void push2(int x){
+    if(top2-1 <=top1) printf("Overflow");
+    top2--;
+    arr[top2]=x;
+}
+
+void pop1() {
+    if(top1 == -1) {
+        printf("underflow");
+    }
+    printf("%d popped\n",arr[top1]);
+    top1--;
+}
+
+void pop2(){
+    if(top2 == N-1){
+        printf("underflow");
+    }
+    printf("%d popped\n", arr[top2]);
+    top2++;
+}
+void display1(){
+    for(int i=0;i<=top1;i++){
+        printf("%d ",arr[i]);
+    }
+    printf("\n");
+}
+void display2(){
+    for(int i=N-1;i>=top2;i--){
+        printf("%d ",arr[i]);
+    }
+    printf("\n");
+}
+
+int main(){
+    push1(1);
+    push1(2);
+    push1(3);
+    display1();
+    pop1();
+    display1();
+    push2(4);
+    push2(5);
+    push2(6);
+    display2();
+    pop2();
+    display2();
+    pop2();
+    display2();
+}
+

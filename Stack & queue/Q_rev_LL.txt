@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct queue{
+    int data;
+    struct queue* next;
+};
+
+struct queue* front = NULL;
+struct queue* rear = NULL;
+
+
+void push(int x){
+    struct queue* newnode;
+    newnode = (struct queue*)malloc(sizeof(struct queue));
+    newnode->data = x;
+    newnode->next = NULL;
+    if(front == NULL){
+        front = rear = newnode;
+    }
+    else{
+        rear->next = newnode;
+        rear = newnode;
+    }
+}
+
+void reverse(){
+    struct queue* nextnode=front;
+    struct queue* curr = front;
+    struct queue* prev = NULL;
+    while(nextnode != NULL){
+        nextnode = curr->next;    
+        curr->next = prev;
+        prev = curr;
+        curr = nextnode;
+    }
+    front = prev;
+}
+
+void display(){
+    struct queue* temp = front;
+    while(temp!=NULL){
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+    printf("\n");
+}
+
+int main(){
+    
+    int N;
+    scanf("%d ",&N);
+    int n;
+    for(int i=0;i<N;i++){
+        scanf("%d",&n);
+        push(n);
+    }
+    display();
+    reverse();
+    display();
+   
+}
