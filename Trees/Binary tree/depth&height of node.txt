@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node {
+    int  data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createNode(int x){
+    struct Node* newnode;
+    newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode->data = x;
+    return newnode;
+}
+
+
+struct Node* create(){
+    struct Node* newnode;
+    int x;
+    scanf("%d",&x);
+    if(x==-1) return 0;
+    newnode = createNode(x);
+    printf("Enter the left Node of %d ",x);
+    newnode->left = create();
+    printf(" Enter the right Node of %d ",x);
+    newnode->right = create();
+    return newnode;
+}
+
+int depthofnode(struct Node* root,int x){
+    if(root == NULL) return -1;
+    
+    int dist = -1;
+    if((root->data == x) || (dist = depthofnode(root->left,x) >=0) || (dist = depthofnode(root->right,x)>=0))
+    return dist+1;
+    return dist;jz
+    
+}
+
+int heightofnode(struct Node* root,int x,int* h){
+    int ans;
+    if(root == NULL) return -1;
+    else{
+        int lheight = heightofnode(root->left,x,h);
+        int rheight = heightofnode(root->right,x,h);
+    
+    if(lheight>rheight)  ans =  lheight+1;
+    else  ans =  rheight+1;
+    }
+    if(root->data == x) *h = ans;
+    return ans;
+}
+
+int findheight(struct Node* root,int x){
+    int h=-1;
+    int height = heightofnode(root,x,&h);
+    return h;
+}
+int main(){
+    struct Node* root;
+    root = create();
+    printf("Height of the Tree -> %d ",findheight(root,25));
+    printf("Depth of the Node %d",depthofnode(root,25));
+    
+}
