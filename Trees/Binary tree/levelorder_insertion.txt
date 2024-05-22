@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Queue {
+    struct Tree* data;
+    struct Queue* next;
+};
+
+struct Tree {
+    int key;
+    struct Tree* left;
+    struct Tree* right;
+};
+
+struct Queue* front = NULL;
+struct Queue* rear = NULL;
+
+void enqueue(struct Tree* node) {
+    struct Queue* newnode = (struct Queue*)malloc(sizeof(struct Queue));
+    newnode->data = node;
+    newnode->next = NULL;
+    if (front == NULL) {
+        front = rear = newnode;
+    } else {
+        rear->next = newnode;
+        rear = newnode;
+    }
+}
+
+struct Tree* dequeue() {
+    if (front == NULL) {
+        return NULL;
+    }
+    struct Queue* temp = front;
+    struct Tree* node = front->data;
+    front = front->next;
+    if (front == NULL) {
+        rear = NULL;
+    }
+    free(temp);
+    return node;
+}
+
+struct Tree* createnode(int x) {
+    struct Tree* newnode = (struct Tree*)malloc(sizeof(struct Tree));
+    newnode->key = x;
+    newnode->left = NULL;
+    newnode->right = NULL;
+    return newnode;
+}
+
+struct Tree* create() {
+    struct Tree* newnode;
+    int x;
+    scanf("%d", &x);
+    if (x == -1) return NULL;
+    newnode = createnode(x);
+    printf("Enter the left element of %d: ", x);
+    newnode->left = create();
+    printf("Enter the right element of %d: ", x);
+    newnode->right = create();
+    return newnode;
+}
+
+void preorder(struct Tree* root) {
+    if (root == NULL) return;
+    printf("%d ", root->key);
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void levelorder(struct Tree* root) {
+    if (root == NULL) return;
+    enqueue(root);
+    while (front != NULL) {
+        struct Tree* temp = dequeue();
+        printf("%d ", temp->key);
+        if (temp->left) enqueue(temp->left);
+        if (temp->right) enqueue(temp->right);
+    }
+}
+
+void levelorderinsert(struct Tree* root, int x) {
+    if (root == NULL) {
+        root = createnode(x);
+        return;
+    }
+    enqueue(root);
+    while (front != NULL) {
+        struct Tree* temp = dequeue();
+        if (temp->left) {
+            enqueue(temp->left);
+        } else {
+            temp->left = createnode(x);
+            break;  // Insertion done, exit the loop
+        }
+        if (temp->right) {
+            enqueue(temp->right);
+        } else {
+            temp->right = createnode(x);
+            break;  // Insertion done, exit the loop
+        }
+    }
+    // Clear the queue after insertion
+    while (front != NULL) {
+        dequeue();
+    }
+}
+
+int main() {
+    struct Tree* root;
+    printf("Create the tree (-1 to end):\n");
+    root = create();
+    printf("Preorder traversal:\n");
+    preorder(root);
+    printf("\nLevel order traversal:\n");
+    levelorder(root);
+    printf("\nInserting 14 into the tree.\n");
+    levelorderinsert(root, 14);
+    printf("\nLevel order traversal after insertion:\n");
+    levelorder(root);
+    return 0;
+}
