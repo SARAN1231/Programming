@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createnode(int x){
+    struct Node* newnode;
+    newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode->data = x;
+    return newnode;
+}
+
+struct Node* insert(struct Node* root,int x) {
+    if(root==NULL) {
+        root = createnode(x);
+        return root;
+    }
+    
+    if(x<root->data){
+        root->left = insert(root->left,x);
+    }
+    else if(x>root->data){
+        root->right = insert(root->right,x);
+    }
+    return root;
+}
+
+int findmin(struct Node* root) {
+    int minval = root->data;
+    while(root->left != NULL){
+        minval = root->left->data;
+        root = root->left;
+    }
+    return minval;
+}
+struct Node* delete(struct Node* root,int x) {
+    if(root == NULL) return NULL;
+    
+    if(x>root->data) {
+        root->right = delete(root->right,x);
+    }
+    else if(x<root->data) {
+        root->left = delete(root->left,x);
+    }
+    else{
+        if(root->left == NULL) return root->right;
+        else if(root->right == NULL) return root->left;
+        else{
+            root->data = findmin(root->right);
+            root->right = delete(root->right,root->data);
+        }
+    }
+    return root;
+}
+
+void inorder(struct Node* root) {
+    if(root == NULL) return;
+    
+    
+    inorder(root->left);
+    printf("%d ",root->data);
+    inorder(root->right);
+}
+int main() {
+    struct Node* root = NULL;
+    int x;
+
+    printf("Enter values to insert into the BST (enter -1 to stop):\n");
+    while (1) {
+        scanf("%d", &x);
+        if (x == -1) break;
+        root = insert(root, x);
+    }
+
+    printf("inorder traversal:\n");
+    inorder(root);
+    int y;
+    printf("\nEnter the element you want to delete ");
+    scanf("%d",&y);
+    delete(root,y);
+     printf("inorder traversal after deletion:\n");
+    inorder(root);
+    
+    return 0;
+}
