@@ -1,0 +1,93 @@
+
+
+class stack {
+    int top =0;
+    int max = 3;
+    class Node {
+        int data;
+        Node next;
+        Node(int d)
+        {
+            data=d;
+            next=null;
+        }
+    }
+    boolean isfull()
+    {
+        if(top==max)
+        {
+            System.out.println("Overflow");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    boolean isempty()
+    {
+        if(top==-1){
+            System.out.println("underflow");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    public Node head = null;
+    public Node tail = null;
+    void push(int d){
+        if(isfull()){
+            Node newnode = new Node(d);
+            if(head ==null){
+                head = newnode;
+                tail = newnode;
+                top++;
+            }
+            else{
+                newnode.next = head;
+                head = newnode;
+                top++;
+            }
+        }
+    }
+    void pop()
+    {
+        if(isempty()){
+            if(top>=0){
+                
+                head = head.next;
+                top--;
+            }
+        
+        }
+    }
+    void display(){
+        Node current = head;
+        while(current!=null)
+        {
+            System.out.print(current.data+" ");
+            current=current.next;
+        }
+        System.out.println();
+    }
+}
+
+
+public class Sstack {
+    public static void main(String[] args) {
+        stack s1 = new stack();
+        
+      s1.push(0);
+      s1.push(1);
+      s1.push(2);
+     
+      s1.display();
+      s1.pop();
+      s1.display();
+      s1.pop();
+      s1.display();
+      s1.pop();
+      s1.display();
+      
+    }
+}

@@ -1,0 +1,91 @@
+class Solution{
+public:
+
+    void getcountutil(struct Node* root,int l,int h,int* count){
+        if(root==NULL) return;
+        getcountutil(root->left,l,h,count);
+         if(root->data >= l && root->data <= h) *count = *count+1;
+        getcountutil(root->right,l,h,count);
+    }
+
+    int getCount(Node *root, int l, int h)
+    {
+      // your code goes here   
+      int count = 0;
+      getcountutil(root,l,h,&count);
+      return count;
+    }
+};
+
+class Solution
+{   
+        private static void getcount(Node root, int l, int h, ArrayList<Integer> arr) {
+        if (root == null) return;
+
+        
+        getcount(root.left, l, h, arr);
+
+       
+        if (root.data >= l && root.data <= h) {
+            arr.add(root.data);
+        }
+
+
+        getcount(root.right, l, h, arr);
+    }
+
+    public static ArrayList<Integer> printNearNodes(Node root, int low, int high) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        getcount(root, low, high, arr);
+        return arr;
+    }
+    
+}
+
+
+class Solution
+{
+    
+   private static void inorderTraversal(Node root, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        inorderTraversal(root.left, list);
+        list.add(root.data);
+        inorderTraversal(root.right, list);
+    }
+
+
+    private static List<Integer> findIntersection(List<Integer> list1, List<Integer> list2) {
+        List<Integer> intersection = new ArrayList<>();
+        int i = 0, j = 0;
+
+        while (i < list1.size() && j < list2.size()) {
+            if (list1.get(i).equals(list2.get(j))) {
+                intersection.add(list1.get(i));
+                i++;
+                j++;
+            } else if (list1.get(i) < list2.get(j)) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        return intersection;
+    }
+
+  
+    public static ArrayList<Integer> findCommon(Node root1, Node root2) {
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+
+        inorderTraversal(root1, list1);
+        inorderTraversal(root2, list2);
+
+        
+        List<Integer> intersection = findIntersection(list1, list2);
+
+        return new ArrayList<>(intersection);
+    }
+    
+}

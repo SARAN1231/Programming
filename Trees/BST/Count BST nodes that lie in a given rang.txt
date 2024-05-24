@@ -1,0 +1,85 @@
+
+Given a Binary Search Tree (BST) and a range l-h(inclusive), count the number of nodes in the BST that lie in the given range.
+
+The values smaller than root go to the left side
+The values greater and equal to the root go to the right side
+Example 1:
+
+Input:
+      10
+     /  \
+    5    50
+   /    /  \
+  1    40  100
+l = 5, h = 45
+Output: 3
+Explanation: 5 10 40 are the node in the
+range
+
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createnode(int x) {
+    struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode->data = x;
+    newnode->left = newnode->right = NULL;
+    return newnode;
+}
+
+struct Node* insert(struct Node* root,int x){
+    if(root == NULL) return createnode(x);
+    
+    if(x<root->data) {
+        root->left = insert(root->left,x);
+    }
+    else{
+        root->right = insert(root->right,x);
+    }
+    return root;
+}
+
+void inorder(struct Node* root) {
+    if(root == NULL) return ;
+    inorder(root->left);
+    printf("%d ",root->data);
+    inorder(root->right);
+}
+
+void getcountutil(struct Node* root,int y,int z,int* count){
+    if(root == NULL) return ;
+    
+    getcountutil(root->left,y,z,count);
+    if(root->data >= y && root->data <= z) *count = *count+1;
+    getcountutil(root->right,y,z,count);
+ }
+ 
+ int getcount(struct Node* root,int y,int z){
+     int count = 0;
+     getcountutil(root,y,z,&count);
+     return count;
+ }
+
+int main() {
+    struct Node* root = NULL;
+    int x;
+    printf("Enter the elements\n");
+    while(1){
+        scanf("%d",&x);
+        if(x==-1) break;
+        root = insert(root,x);
+    }
+    inorder(root);
+    int y,z;
+    printf("Range");
+    scanf("%d%d",&y,&z);
+     printf("%d ",getcount(root,y,z));
+}
