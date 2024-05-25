@@ -1,0 +1,30 @@
+int findmin(struct Node* root) {
+    int min = root->data;
+    while(root->left != NULL){
+        min = root->left->data;
+        root = root->left;
+    }
+    return min;
+}
+struct Node* deleteNode(struct Node* root, int key)
+{
+    //your code goes here
+    if(root == NULL) return root;
+    if(key<root->data) 
+    root->left = deleteNode(root->left,key);
+    else if(key >root->data ) {
+        root->right = deleteNode(root->right,key);
+    }
+    else {
+        if(root->right == NULL)
+        return root->left;
+        else if(root->left == NULL)
+        return root->right;
+        else{
+            root->data = findmin(root->right);
+            root->right = deleteNode(root->right,root->data);
+        }
+       
+    }
+     return root;
+}
