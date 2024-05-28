@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createnode(int x){
+    struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode->data = x;
+    newnode->left = newnode->right = NULL;
+    return newnode;
+}
+
+struct Node* create() {
+   
+    int x;
+    scanf("%d",&x);
+    if(x==-1) return NULL;
+    struct Node* newnode;
+    newnode = createnode(x);
+    printf("enter the left element of %d",x);
+    newnode->left = create();
+    printf("Enter the right element of %d",x);
+    newnode->right = create();
+    return newnode;
+}
+
+void inorder(struct Node* root){
+        if(root == NULL) return ;
+        inorder(root->left);
+        printf("%d ",root->data);
+        inorder(root->right);
+}
+
+void sumleafutil(struct Node* root,int* sum) {
+    if(root == NULL) return;
+    if(root->left == NULL && root->right ==NULL) {
+        *sum +=root->data;
+    }
+    sumleafutil(root->left,sum);
+    sumleafutil(root->right,sum);
+}
+
+int sumleaf(struct Node* root) {
+    
+    int sum =0;
+    sumleafutil(root,&sum);
+    return sum;
+}
+
+int main() {
+    struct Node* root;
+    root = create();
+    inorder(root);
+    printf("sum = %d",sumleaf(root));
+}
