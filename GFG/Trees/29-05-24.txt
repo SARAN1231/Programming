@@ -1,0 +1,83 @@
+class Solution
+{
+    boolean ancestor(Node root,int k,ArrayList<Integer> arr){
+        if(root == null) return false;
+        if(root.data == k) return true;
+        if(ancestor(root.left,k,arr) || ancestor(root.right,k,arr)) {
+            arr.add(root.data);
+            return true;
+        }
+        return false;
+    }
+    
+    public  ArrayList<Integer> Ancestors(Node root, int target)
+    {
+        // add your code here
+        ArrayList<Integer> arr =  new ArrayList<>();
+        ancestor(root,target, arr);
+        return arr;
+    }
+}
+
+
+class Solution
+{
+    //Function to return the level order traversal of a tree.
+    static ArrayList <Integer> levelOrder(Node root) 
+    {
+        // Your code here
+        ArrayList<Integer> arr = new ArrayList<>();
+          if(root==null) return arr;
+        Queue<Node> q = new LinkedList<>();
+      
+        q.add(root);
+        while(!q.isEmpty()) {
+            Node temp = q.poll();
+            arr.add(temp.data);
+            if(temp.left != null) q.add(temp.left);
+            if(temp.right != null) q.add(temp.right);
+        }
+        return arr;
+    }
+}
+
+class Solution {
+    // Function to convert a binary tree into its mirror tree.
+    void mirror(Node root) {
+        // Your code here
+        if(root == null) return;
+       mirror(root.left);
+       mirror(root.right);
+       Node temp = root.left;
+       root.left = root.right;
+       root.right = temp;
+    }
+}
+
+*/
+class Tree
+{
+    void sibling(Node root,ArrayList<Integer> arr) {
+        if(root==null) return;
+        if(root.left == null && root.right != null){
+            arr.add(root.right.data);
+        }
+        if(root.left!=null && root.right == null){
+            arr.add(root.left.data);
+        }
+        sibling(root.left,arr);
+        sibling(root.right,arr);
+    }
+    ArrayList<Integer> noSibling(Node root)
+    {
+        // code here
+        ArrayList<Integer> arr = new ArrayList<>();
+        
+        sibling(root,arr);
+        Collections.sort(arr);
+         if (arr.isEmpty()) {
+            arr.add(-1); 
+        }
+        return arr;
+    }
+}
