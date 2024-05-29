@@ -81,3 +81,27 @@ class Tree
         return arr;
     }
 }
+
+
+class Solution
+{
+    void klargestutil(Node root,int k,int[] count,int[] res){
+        if(root == null || count[0]>=k) return;
+        klargestutil(root.right,k,count,res);
+        count[0]++;
+        if(count[0] == k){
+            res[0] = root.data;
+            return;
+        }
+        klargestutil(root.left,k,count,res);
+    }
+    // return the Kth largest element in the given BST rooted at 'root'
+    public int kthLargest(Node root,int k)
+    {
+        //Your code here
+        int[] count = {0};
+        int[] res = {-1} ;
+        klargestutil(root,k,count,res);
+        return res[0];
+    }
+}

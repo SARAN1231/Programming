@@ -35,8 +35,26 @@ void inorder(struct Node* root) {
     printf("%d ",root->data);
     inorder(root->right);
 }
+void klargestutil(struct Node* root,int k,int* count,int *res){
+    if(root == NULL || *count>=k){
+        return;
+    }
+    klargestutil(root->right,k,count,res);
+    (*count)++;
+    if(*count == k) {
+        *res = root->data;
+        return;
+    }
+    klargestutil(root->left,k,count,res);
+}
 
-
+int klargest(struct Node* root,int k) {
+    int count = 0;
+    int res = -1;
+  klargestutil(root,k,&count,&res);
+    return res;
+    
+}
 int main() {
     struct Node* root = NULL;
     int x;
@@ -47,6 +65,6 @@ int main() {
         root = insert(root,x);
     }
    inorder(root);
- 
+   printf("\n%d ",klargest(root,2));
    
 }
