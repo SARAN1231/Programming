@@ -1,0 +1,27 @@
+class Solution
+{
+    public long find_fact(int n)
+    {
+        // Code here
+        if(n==0 ||n==1) return 1;
+        else return n*find_fact(n-1);
+    }
+}
+
+
+class Solution 
+{ 
+    String to_upper(String str) 
+    { 
+        // code here
+        return str.toUpperCase();
+    }
+} 
+
+
+class Solution {
+    static String toLower(String s) {
+        // code here
+        return s.toLowerCase();
+    }
+}
