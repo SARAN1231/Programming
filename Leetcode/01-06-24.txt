@@ -1,0 +1,53 @@
+class Solution {
+    int squares(int n) { 
+        int sum=0;
+        while(n>0) {
+        sum =sum+ (int)Math.pow(n%10,2);
+        n/=10;
+        }
+        return sum;
+    }
+    public boolean isHappy(int n) {
+       int slow =n;
+       int fast = n;
+      do {
+        slow = squares(slow);
+        fast = squares(fast);
+        fast = squares(fast);
+        if(fast == 1) return true;
+       }  while(slow!=fast);
+       return false;
+    }
+}
+
+
+class Solution {
+    public int addDigits(int n) {
+        while(n/10!=0){
+             int sum =0;
+        while(n>0) {
+            int r = n%10;
+            sum += r;
+            n=n/10;
+        }
+        if(sum/10 ==0) return sum;
+        else{
+            n = sum;
+        }
+        }
+        return n;
+    }
+}
+
+class Solution {
+    public boolean isUgly(int n) {
+        for(int i=2;i<=5 && n>0;i++) {
+            while(n%i==0) {
+                n/=i;
+            }
+        }
+        return n==1;
+
+
+    }
+}

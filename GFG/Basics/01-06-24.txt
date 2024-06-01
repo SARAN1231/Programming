@@ -1,0 +1,90 @@
+class Solution
+{
+    //Function to return list containing first n fibonacci numbers.
+    public static long[] printFibb(int n) 
+    {
+        //Your code here
+        long arr[] = new long[n];
+        
+        int j=2;
+        long a =1;
+        long b =1;
+        if (n >= 1) {
+            arr[0] = 1;
+        }
+        
+        if (n >= 2) {
+            arr[1] = 1;
+        }
+        for (int i=3;i<=n;i++) {
+            
+            long c= a+b;
+            arr[j] = c;
+            j++;
+            a=b;
+            b=c;
+        }
+        return arr;
+    }
+    
+}
+
+
+class Solution {
+    static int nthFibonacci(int n){
+        // code here
+        if(n==1 || n==2) return 1;
+        int a =1;
+        int b =1;
+        int C = 0;
+        for(int i=3;i<=n;i++){
+          C = (a+b)%1000000007;
+         a=b;
+         b=C;
+         }
+    return C;
+    }
+}
+
+
+class Solution {
+    static long fibSum(long n) {
+        // code here
+         if(n==1) return 1;
+         if(n==2) return 2;
+       
+        int a =1;
+        int b =1;
+        int C = 0;
+        int sum =2;
+        for(int i=3;i<=n;i++){
+          C = (a+b)%1000000007;
+          sum = (sum+C)%1000000007;
+         a=b;
+         b=C;
+         }
+    return sum;
+    }
+}
+
+
+
+class Solution {
+    static int fib(int n) {
+        // code here
+        if (n == 0) return 0;
+        if (n == 1 || n == 2) return 1;
+        
+        int a = 1;
+        int b = 1;
+        int C = 0;
+        
+        for (int i = 3; i <= n; i++) {
+            C = (a + b) % 10;
+            a = b;
+            b = C;
+        }
+        
+        return C ;
+    }
+}
