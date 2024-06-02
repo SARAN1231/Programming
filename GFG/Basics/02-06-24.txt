@@ -1,0 +1,36 @@
+class Solution{
+    public static int kthSmallest(int[] arr, int l, int r, int k) 
+    { 
+        //Your code here
+        Arrays.sort(arr);
+        return arr[k-1];
+    } 
+}
+
+class Solution
+{
+    ArrayList<Integer> commonElements(int A[], int B[], int C[], int n1, int n2, int n3) 
+    {
+        // code here 
+        Map<Integer,Integer> countMap = new HashMap<>();
+        ArrayList<Integer> result = new ArrayList<>();
+         for (int i = 0; i < n1; i++) {
+            countMap.put(A[i], 1);
+        }
+        
+          for (int i = 0; i < n2; i++) {
+            if (countMap.containsKey(B[i]) && countMap.get(B[i]) == 1) {
+                countMap.put(B[i], 2);
+            }
+        }
+        
+        for (int i = 0; i < n3; i++) {
+            if (countMap.containsKey(C[i]) && countMap.get(C[i]) == 2) {
+                result.add(C[i]);
+                // Mark as processed to avoid duplicates in result
+                countMap.put(C[i], -1);
+            }
+        }
+        return result;
+    }
+}
