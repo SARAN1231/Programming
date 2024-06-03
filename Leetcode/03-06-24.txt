@@ -1,0 +1,54 @@
+class Solution {
+    public int firstUniqChar(String ss) {
+      
+        char[] ch = ss.toCharArray();
+        HashMap<Character,Integer> s = new HashMap<>();
+        for(int i=0;i<ch.length;i++) {
+            if(s.containsKey(ch[i])) {
+                s.put(ch[i],s.get(ch[i])+1);
+            }
+            else {
+                s.put(ch[i],1);
+            }
+        }
+        for(int i=0;i<ch.length;i++) {
+            if(s.get(ch[i]) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+class Solution {
+    public char repeatedCharacter(String ss) {
+        char[] ch = ss.toCharArray();
+        HashMap<Character,Integer> s = new HashMap<>();
+        int i;
+        for( i=0;i<ch.length;i++){
+            if(s.containsKey(ch[i])){
+                break;
+            }
+            else {
+                s.put(ch[i],1);
+            }
+        }
+       
+        return ch[i];
+    }
+}
+
+
+class Solution {
+    public int percentageLetter(String s, char letter) {
+        char[] ch = s.toCharArray();
+        int c =0;
+        for(int i=0;i<ch.length;i++) {
+            if(letter == ch[i]) {
+                 c++;
+            }
+        }
+        int d = (c*100)/ch.length;
+        return d;
+    }
+}
