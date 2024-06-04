@@ -1,0 +1,82 @@
+class Solution
+{
+    static int majorityElement(int nums[], int size)
+    {
+        // your code here
+         HashMap<Integer ,Integer> a = new HashMap<>();
+        int n = size;
+        if(n==1) return nums[0];
+        int c = -1;
+        for(int i=0;i<n;i++) {
+            if(a.containsKey(nums[i])) {
+                a.put(nums[i],a.get(nums[i])+1);
+                if(a.get(nums[i]) > n/2) {
+                    c = nums[i];
+                    break;
+                }
+            }
+            else {
+                a.put(nums[i],1);
+            }
+        }
+        return c;
+    }
+}
+
+class Solution 
+{
+    //Function to find all elements in array that appear more than n/k times.
+    public int countOccurence(int[] arr, int n, int k) 
+    {
+        // your code here,return the answer
+        HashMap<Integer ,Integer> a = new HashMap<>();
+        int count =0;
+        for(int i=0;i<n;i++) {
+            if(a.containsKey(arr[i])) {
+                a.put(arr[i],a.get(arr[i])+1);
+            }
+            else {
+                a.put(arr[i],1);
+            }
+        }
+        for(int i=0;i<n;i++) {
+             if(a.get(arr[i]) > n/k) {
+                 count++;
+                 a.put(arr[i],-1);
+             }
+             
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int findExtra(int a[], int b[], int n) {
+        
+        if(n==1) return 0;
+        // add code here.
+        int c =0;
+        int j =0;
+        for(int i=0;i<n;i++){
+            if(a[i] != b[j]) return i;
+            j++;
+            if(j>b.length-1) return ++i;
+        }
+        return 0;
+    }
+
+
+class Solution {
+    int binarysearch(int arr[], int n, int k) {
+        // code here
+        int l = 0;
+        int r = n-1;
+        while(l<=r) {
+            int mid = (l+r)/2;
+            if(arr[mid] == k) return mid;
+            else if(k > arr[mid]) l = mid+1;
+            else r = mid -1;
+        }
+        return -1;
+    }
+}

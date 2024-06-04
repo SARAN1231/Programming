@@ -1,0 +1,39 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        HashMap<Integer ,Integer> a = new HashMap<>();
+        int n = nums.length;
+        if(n==1) return nums[0];
+        int c = 1;
+        for(int i=0;i<n;i++) {
+            if(a.containsKey(nums[i])) {
+                a.put(nums[i],a.get(nums[i])+1);
+                if(a.get(nums[i]) > n/2) {
+                    c = nums[i];
+                    break;
+                }
+            }
+            else {
+                a.put(nums[i],1);
+            }
+        }
+        return c;
+    }
+}
+
+
+class Solution {
+    public List<String> fizzBuzz(int n) {
+        List<String> list = new ArrayList<>();
+        String a;
+        for(int i=1;i<=n;i++) {
+            if(i%3 ==0 && i%5 ==0) list.add("FizzBuzz");
+            else if(i%3 ==0) list.add("Fizz");
+            else if(i%5 == 0) list.add("Buzz");
+            else {
+                a = Integer.toString(i);
+                list.add(a);
+            }
+        }
+        return list;
+    }
+}
