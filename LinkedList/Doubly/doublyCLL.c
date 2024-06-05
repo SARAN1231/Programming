@@ -45,7 +45,6 @@ void insbeg(){
 void insend(){
       newnode = (struct node*)malloc(sizeof(struct node));
     scanf("%d",&newnode->data);
-    
     tail->next = newnode;
     newnode->prev = tail;
     tail = newnode;

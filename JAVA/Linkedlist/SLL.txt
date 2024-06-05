@@ -1,0 +1,69 @@
+import java.util.*;
+
+class Link {
+    
+    class Node {
+        int data;
+        Node next;
+        
+        Node(int d) {
+            data = d;
+            next = null;
+        }
+    }
+    
+    public Node head = null;
+    public Node tail = null;
+    
+    void create() {
+        int d;
+        Scanner sc = new Scanner(System.in);
+        d = sc.nextInt();
+        
+        Node newnode = new Node(d);
+        if(head == null){
+            head = tail = newnode;
+        }
+        else {
+            tail.next = newnode;
+            tail = newnode;
+        }
+    }
+    
+    void display() {
+        Node temp = head;
+        
+        while(temp != null) {
+            System.out.print(temp.data+" ");
+            temp = temp.next;
+        }
+    }
+    
+    void reverse() {
+        Node nextnode,curr,prev = null;
+        curr = head;
+        while(curr != null) {
+            nextnode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextnode;
+        }
+        head = prev;
+    }
+
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		Link s1 = new Link();
+		s1.create();
+		s1.create();
+		s1.create();
+		s1.create();
+		s1.create();
+		s1.display();
+		s1.reverse();
+		s1.display();
+	}
+}

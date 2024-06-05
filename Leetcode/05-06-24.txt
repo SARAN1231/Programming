@@ -1,0 +1,118 @@
+class Solution {
+     public List<String> commonChars(String[] words) {
+        List<String> res = new ArrayList<>();
+        HashMap<Character, Integer> mins = new HashMap<>();
+        
+        // Initialize mins with the frequency of characters in the first word
+        for (char ch : words[0].toCharArray()) {
+            mins.put(ch, mins.getOrDefault(ch, 0) + 1);
+        }
+
+        // Compare with the frequency of characters in the remaining words
+        for (int i = 1; i < words.length; i++) {
+            HashMap<Character, Integer> b = new HashMap<>();
+            for (char c : words[i].toCharArray()) {
+                b.put(c, b.getOrDefault(c, 0) + 1);
+            }
+            // Update mins to have the minimum frequency of each character
+            for (char c : mins.keySet()) {
+                if (b.containsKey(c)) {
+                    mins.put(c, Math.min(b.get(c), mins.get(c)));
+                } else {
+                    mins.put(c, 0);
+                }
+            }
+        }
+
+        // Construct the result list based on the minimum frequencies
+        for (Map.Entry<Character, Integer> entry : mins.entrySet()) {
+            char c = entry.getKey();
+            int freq = entry.getValue();
+            for (int i = 0; i < freq; i++) {
+                res.add(String.valueOf(c));
+            }
+        }
+
+        return res;
+    }
+}
+
+class Solution {
+    public char findTheDifference(String ss, String t) {
+        char ch=0;
+        HashMap<Character,Integer> s =new HashMap<>();
+        for(char c:ss.toCharArray()) {
+            s.put(c,s.getOrDefault(c, 0) + 1);
+        }
+         for(char c : t.toCharArray()) {
+            s.put(c, s.getOrDefault(c, 0) - 1); 
+        }
+
+        for(Map.Entry<Character,Integer> entry : s.entrySet()) {
+            if(entry.getValue() != 0) {
+                ch = entry.getKey();
+                break;
+            }
+        }
+        return ch;
+    }
+}
+
+
+class Solution {
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        int i =0;
+        for( i=0;i<n;i++) {
+            if(nums[i] != i) return i;
+        }
+        return i;
+    }
+}
+
+class Solution {
+    public int thirdMax(int[] nums) {
+        TreeSet<Integer> set = new TreeSet<>();
+        for (int num : nums) {
+            set.add(num);
+            if (set.size() > 3) {
+                set.remove(set.first());
+            }
+        }
+        return (set.size() < 3) ? set.last() : set.first();
+    }
+}
+
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> s = new HashSet<>();
+        for(int i:nums) {
+            if(s.contains(i)) return true;
+            else{
+                s.add(i);
+            }
+        }
+        return false;
+    }
+}
+
+import java.util.HashMap;
+
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                int prevIndex = map.get(nums[i]);
+                if (i - prevIndex <= k) {
+                    return true;
+                }
+            }
+            map.put(nums[i], i);
+        }
+        
+        return false;
+    }
+}

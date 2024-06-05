@@ -1,0 +1,54 @@
+import java.util.*;
+
+class Tree {
+    
+    class Node{
+        int data;
+        Node left;
+        Node right;
+        
+        Node(int d) {
+            data = d;
+            left = null;
+            right = null;
+        }
+    }
+    
+    Node insert(Node root,int d) {
+      
+        if(root == null) {
+            root = new Node(d);
+            return root;
+        }
+        if(d > root.data) root.right =  insert(root.right,d);
+        else if(d<root.data) root.left = insert(root.left,d);
+        
+        return root;
+    }
+    
+    void inorder(Node root) {
+        if(root == null) return;
+        
+        inorder(root.left);
+        System.out.print(root.data+" ");
+        inorder(root.right);
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		Tree s1 = new Tree();
+	    Tree.Node root = null;
+	    
+	    Scanner sc = new Scanner(System.in);
+	    int d;
+	    for(int i=0;i<5;i++){
+	         d  = sc.nextInt();
+	         root = s1.insert(root,d);
+	    }
+	   
+	    System.out.println("Inorder traversal of the BST:");
+        s1.inorder(root);
+	}
+}

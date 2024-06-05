@@ -1,0 +1,38 @@
+class Solution {
+    // Return the Kth smallest element in the given BST
+    int res =-1;
+    int count =0;
+    void small(Node root,int k) {
+        if(root == null) return;
+        small(root.left,k);
+        count++;
+        if(count ==k) {
+            res = root.data;
+            return;
+        }
+        small(root.right,k);
+    }
+    public int KthSmallestElement(Node root, int K) {
+        // Write your code here
+        
+        small(root, K);
+        return res;
+    }
+}
+
+
+class Tree {
+    // Function to return the ceil of given number in BST.
+    int res = -1;
+    int findCeil(Node root, int key) {
+        while(root != null) {
+        if(root.data == key) return key;                                
+        if(key>root.data) root = root.right;
+        else if(key<root.data) {
+           res = root.data;
+           root = root.left;
+        }
+        }
+        return res;
+    }
+}
