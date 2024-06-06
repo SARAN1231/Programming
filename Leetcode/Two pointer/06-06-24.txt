@@ -1,0 +1,145 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] arr = new int[2];
+        int l=0;
+        int r = nums.length-1;
+       for(int i=0;i<=r;i++) {
+        for(int j=r;j>i;j--) {
+            if(nums[i]+nums[j] == target){
+                arr[0] = i+1;
+                arr[1] = j+1;
+                return arr;
+            }
+        }
+       }
+       return arr;
+    }
+}
+
+class Solution {
+    public boolean judgeSquareSum(int c) {
+        long l =0;
+        long r =(long)Math.sqrt(c);
+        while(l<=r) {
+            long sum = (l*l)+(r*r);
+            if(sum ==c) return true;
+            else if(sum < c) l++;
+            else r--;
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public boolean isPerfectSquare(int num) {
+     if (num < 2) return true;
+        
+        long left = 2;
+        long right = num / 2;
+        long mid, guessedSquare;
+        
+        while (left <= right) {
+            mid = left + (right - left) / 2;
+            guessedSquare = mid * mid;
+            
+            if (guessedSquare == num) {
+                return true;
+            } else if (guessedSquare > num) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        
+        return false;
+    }
+}
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> l = new ArrayList<>();
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++){
+            if(i>0 && nums[i]==nums[i-1]) continue;
+
+            int j=i+1;
+            int k= nums.length-1;
+
+            while(j<k) {
+                int sum = nums[i]+nums[j]+nums[k];
+
+                if(sum ==0) {
+                    l.add(Arrays.asList(nums[i],nums[j],nums[k]));
+
+                    while(j<k && nums[j] == nums[j+1]) j++;
+                    while(j<k && nums[k] == nums[k-1]) k--;
+                    j++;
+                    k--;
+                }
+                else if(sum<0) j++;
+                else k--;
+            }
+        }
+        return l;
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    void inorder(TreeNode root, List<Integer> arr) {
+        if (root == null) return;
+        inorder(root.left, arr);
+        arr.add(root.val);
+        inorder(root.right, arr);
+    }
+    public boolean findTarget(TreeNode root, int k) {
+        List<Integer> arr = new ArrayList<>();
+        inorder(root, arr);
+        
+        int l = 0;
+        int r = arr.size() - 1;
+        
+        while (l < r) {
+            int sum = arr.get(l) + arr.get(r);
+            if (sum == k) {
+                return true;
+            } else if (sum < k) {
+                l++;
+            } else {
+                r--;
+            }
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+        int count = 0;
+        Arrays.sort(people);
+        int l =0;
+        int r = people.length-1;
+        while(l<=r) {
+            int sum = people[l] + people[r];
+            if(sum <= limit) l++;
+            r--;
+            count++;
+            
+        }
+        return count;
+    }
+}
