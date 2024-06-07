@@ -1,0 +1,28 @@
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        int[] freq = new int[nums.length+1];
+        List<Integer> arr = new ArrayList<>();
+        for(int i : nums) {
+            freq[i] = 1;
+        }
+        for(int i=1;i<=nums.length;i++) {
+            if(freq[i] ==0) arr.add(i);
+        }
+        return arr;
+    }
+}
+
+class Solution {
+    public String capitalizeTitle(String title) {
+       title =  title.toLowerCase();
+       String[] str = title.split(" ");
+       StringBuilder s = new StringBuilder();
+       for(String word : str) {
+        if(word.length() <=2) {
+            s.append(word).append(" ");
+        }else
+            s.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
+       }
+       return s.toString().trim();
+    }
+}
