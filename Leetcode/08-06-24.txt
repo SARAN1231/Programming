@@ -1,0 +1,62 @@
+class Solution {
+    public String convertToTitle(int c) {
+        StringBuilder s = new StringBuilder();
+        while(c>0) {
+            c--;
+            char ch = (char)(c%26 +'A');
+            s.insert(0,ch);
+            c/=26;
+        }
+        return s.toString();
+    }
+
+}
+
+class Solution {
+    public int titleToNumber(String s) {
+        int res = 0;
+        for(int i=0;i<s.length();i++) {
+            res = res*26 + s.charAt(i) -'A' +1;
+        }
+        return res;
+    }
+}
+
+ for (int i = 0; i < nums.length - 1; i++) {
+            int sum = nums[i];
+            // Iterate through the array to form subarrays starting from index i
+            for (int j = i + 1; j < nums.length; j++) {
+                sum += nums[j];
+                // Check if the sum is a multiple of k
+                if (k != 0 && sum % k == 0) {
+                    return true;
+                }
+                // Special case for k == 0
+                if (k == 0 && sum == 0) {
+                    return true;
+                }
+            }
+        }
+
+class Solution {
+    public int findMaxConsecutiveOnes(int[] arr) {
+        int i=0;
+        int max =0;
+        int count = 0;
+
+        while(i<arr.length) {
+            if(arr[i] ==1) {
+                count++;
+             
+               if(count > max) max = count;
+            }
+            else {
+                count =0;
+            
+            }
+            i++;
+        }
+        return max;
+    }
+}
+
