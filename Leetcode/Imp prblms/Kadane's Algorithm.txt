@@ -1,0 +1,31 @@
+long max = Long.MIN_VALUE;
+        int sum =0;
+        for(int i=0;i<n;i++) {
+            sum = 0;
+            for(int j=i;j<n;j++) {
+                sum+=nums[j];
+                if(sum>max) max = sum;
+                
+            }
+        }
+
+algorithm :
+
+class Solution{
+
+    long maxSubarraySum(int nums[], int n){
+        
+        // Your code here
+          if (n == 0) return 0; 
+
+        long maxSoFar = nums[0];
+        long maxEndingHere = nums[0];
+        
+        for(int i=1;i<n;i++) {
+            maxEndingHere = Math.max(nums[i],maxEndingHere+nums[i]);
+            maxSoFar = Math.max(maxSoFar,maxEndingHere);
+        }
+        return maxSoFar;
+    }
+    
+}

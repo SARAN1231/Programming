@@ -1,0 +1,65 @@
+Given an integer array nums and an integer k, return the number of non-empty subarrays that have a sum divisible by k.
+
+A subarray is a contiguous part of an array.
+
+ 
+
+Example 1:
+
+Input: nums = [4,5,0,-2,-3,1], k = 5
+Output: 7
+Explanation: There are 7 subarrays with a sum divisible by k = 5:
+[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]
+Example 2:
+
+Input: nums = [5], k = 9
+Output: 0
+
+
+
+efficient way 
+ class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+       HashMap<Integer,Integer> res = new HashMap<>();
+       res.put(0,1);
+    int sum =0;
+    int count =0;
+       for(int num : nums) {
+            sum += num;
+             int rem = sum %k;
+             if(rem <0)  rem += k;
+             if(res.containsKey(rem)) {
+                count = count + res.get(rem);
+                res.put(rem,res.get(rem)+1);
+             }
+             else {
+                res.put(rem,1);
+             }
+
+       }
+        return count;
+    }
+}
+
+using 2 loops (Time Limit Exceeded for large inputs)
+class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+        if(nums.length ==1) {
+            return (nums[0] % k ==0 ? 1 : 0);
+        }
+        int count =0;
+        int sum =0;
+        for(int i=0;i<nums.length-1;i++) {
+            sum = nums[i];
+            if(nums[i] % k == 0) count++;
+            for(int j=i+1;j<nums.length;j++){
+                sum=sum+nums[j];
+                if( sum % k ==0)  count++;
+            }
+        }
+        if(nums.length > 1) {
+            if(nums[nums.length-1] % k ==0 ) count++;
+        }
+        return count;
+    }
+}
