@@ -1,0 +1,231 @@
+class Solution{
+    
+    boolean isprime(int n) {
+        if(n<=1) return false;
+        
+        for(int i=2;i<=n/2;i++){
+            if(n%i ==0) return false;
+        }
+        return true;
+    }
+     int primeSum(int n){
+         int sum = 0;
+        // code here
+        while(n>0){
+            int rem = n%10;
+            boolean res = isprime(rem);
+            if(res) {
+                sum+=rem;
+            }
+            n/=10;
+        }
+        return sum;
+    }
+}
+
+
+class Sol
+{
+    int getCount (String S, int N)
+    {
+        HashMap<Character,Integer> res = new HashMap<>();
+        for(char c : S.toCharArray()) {
+            if(res.containsKey(c)) {
+                res.put(c,res.get(c)+1);
+            }
+            else{
+                res.put(c,1);
+            }
+        }
+        int count =0;
+        for(Map.Entry<Character,Integer> entry : res.entrySet()) {
+            int v = entry.getValue();
+            if(v == N) count++;
+        }
+        return count;
+    }
+}
+
+class Solution
+{
+    ArrayList<Long> alternateSort(long arr[] ,int N)
+    {
+        
+        // Your code goes here
+        Arrays.sort(arr);
+        int l=0;
+        int r = arr.length-1;
+       ArrayList<Long> res = new ArrayList<>();
+        int i=0;
+        while(l<=r) {
+            res.add(arr[r]);
+            res.add(arr[l]);
+            l++;
+            r--;
+        }
+        return res;
+    }
+}
+class GfG
+{
+/*method prints the given pattern in a single line */
+	void printPattern(String s)
+	{
+	    //Your code here
+	   int mid = s.length()/2;
+	   String f = s.substring(0,mid);
+	   String t = s.substring(mid);
+	   t = t+f;
+	   for(int i=0;i<s.length();i++){
+	       String r = t.substring(0,i+1);
+	       System.out.print(r+"$ ");
+	   }
+	}
+}
+class Solution
+{
+    public int[] common_digits(int[] nums)
+    {
+        // code here
+        HashSet<Integer> res =  new HashSet<>();
+        for(int n : nums) {
+            while(n>0) {
+                int rem = n%10;
+                if(!res.contains(rem)) {
+                   res.add(rem);
+                }
+                n/=10;
+            }
+        }
+        int j=0;
+        int[] arr = new int[res.size()];
+        for(int i : res) {
+            arr[j] = i;
+            j++;
+        }
+        return arr;
+    }
+}
+
+class Solution
+{
+    String reverseWithSpacesIntact(String S)
+    {
+        // your code here
+        char[] arr = S.toCharArray();
+        int l =0;
+        int r = S.length()-1;
+       
+        while(l<r) {
+            if(arr[l] == ' ') l++;
+            else if(arr[r] ==' ') r--;
+            else{
+                char temp = arr[r];
+                arr[r] = arr[l];
+                arr[l] = temp;
+            l++;
+            r--;
+            }
+        }
+        return new String(arr);
+    }
+}
+
+
+class Solution {
+    int remove_duplicate(int A[],int N){
+        // code here
+      
+        int j = 0; // Pointer to keep track of the next available position for a unique element
+        
+        // Iterate through the array
+        for (int i = 0; i < N - 1; i++) {
+            // If the current element is different from the next element, it's a unique element
+            if (A[i] != A[i + 1]) {
+                A[j++] = A[i]; // Move the unique element to the next available position
+            }
+        }
+        
+        // Move the last element to its correct position
+        A[j++] = A[N - 1];
+        
+        return j;
+    }
+}
+
+class Solution {
+    // Finds decimal value of a given roman numeral
+    public int romanToDecimal(String str) {
+        // code here
+        HashMap<Character, Integer> romanValues = new HashMap<>();
+        romanValues.put('I', 1);
+        romanValues.put('V', 5);
+        romanValues.put('X', 10);
+        romanValues.put('L', 50);
+        romanValues.put('C', 100);
+        romanValues.put('D', 500);
+        romanValues.put('M', 1000);
+        int res = 0;
+        
+        for(int i=0;i<str.length();i++) {
+            int curr = romanValues.get(str.charAt(i));
+            if(i<str.length() -1 && curr < romanValues.get(str.charAt(i+1))){
+                res = res -curr;
+            }
+            else {
+                res = res+curr;
+            }
+        }
+        return res;
+    }
+}
+
+class Solution
+{
+    ArrayList<Integer> findMissing(int a[], int b[], int n, int m)
+    {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        HashMap<Integer,Integer> result = new HashMap<>();
+       
+        for(int i : a) {
+            if(result.containsKey(i)){
+                result.put(i,result.get(i)+1);
+            }
+            else{
+                result.put(i,1);
+            }
+        }
+        for(int i : b) {
+            if(result.containsKey(i)){
+                result.put(i,result.get(i)-1);
+            }
+            
+        }
+        for(int num :a){
+            if(result.getOrDefault(num,0)>0){
+                ans.add(num);
+               result.put(num , result.getOrDefault(num,0)-1);
+            }
+        }
+        return ans;
+    }
+}
+
+class Solution {
+    public static String encode(String s) {
+        // code here
+        HashMap<Character,Integer> res = new HashMap<>();
+        for(char c:s.toCharArray()){
+            res.put(c,res.getOrDefault(c,0)+1);
+        }
+        StringBuilder ans = new StringBuilder();
+        
+        for(Map.Entry<Character,Integer> entry : res.entrySet()) {
+            int v = entry.getValue();
+            char c = entry.getKey();
+            ans.append(c).append(v);
+        }
+        return new String(ans);
+    }
+}
+   
