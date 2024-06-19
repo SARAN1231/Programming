@@ -28,7 +28,7 @@ void display(){
     }
 }
 void insbeg(){
-     newnode = (struct node*)malloc(sizeof(struct node));
+    newnode = (struct node*)malloc(sizeof(struct node));
     scanf("\n%d", &newnode->data);
         newnode->next = head;
         head = newnode;
