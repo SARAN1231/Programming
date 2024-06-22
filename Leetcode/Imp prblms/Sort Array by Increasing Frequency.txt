@@ -1,0 +1,26 @@
+class Solution {
+    public int[] frequencySort(int[] nums) {
+       HashMap<Integer,Integer> res = new HashMap<>();
+       for(int i : nums) {
+        res.put(i , res.getOrDefault(i,0)+1);
+       }
+
+       List<Map.Entry<Integer,Integer>> list =  new ArrayList<>(res.entrySet());
+       list.sort((a,b) -> {
+        int freq = a.getValue().compareTo(b.getValue());
+        if(freq == 0) {
+            return b.getKey().compareTo(a.getKey());
+        }
+        return freq;
+       });
+
+       List<Integer> sort = new ArrayList<>();
+       for(Map.Entry<Integer,Integer> entry : list) {
+        for(int i=0;i<entry.getValue();i++){
+            sort.add(entry.getKey());
+        }
+       }
+      int[] sortedArray = sort.stream().mapToInt(Integer::intValue).toArray();
+      return sortedArray;
+    }
+}
