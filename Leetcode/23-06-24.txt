@@ -1,0 +1,131 @@
+class Solution {
+    int countdigit(int a,int b) {
+        int temp = b;
+        int count =0;
+        while(temp>0) {
+            count++;
+            temp/=10;
+        }
+        int v = (a*(int) Math.pow(10,count)) + b;
+        return v;
+    }
+    public long findTheArrayConcVal(int[] nums) {
+        int l =0;
+        int r = nums.length -1;
+        long concat = 0;
+        while(l<r){
+            long cv = countdigit(nums[l],nums[r]);
+            concat+=cv;
+            l++;
+            r--;
+           
+        }
+         if(l==r){
+                concat+=nums[l];
+            }
+        return concat;
+    }
+}
+
+
+class Solution {
+    public int[] distinctDifferenceArray(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            Set<Integer> prefix = new HashSet<>();
+            Set<Integer> suffix = new HashSet<>();
+            
+            for (int j = 0; j <= i; j++) {
+                prefix.add(nums[j]);
+            }
+            
+        
+            for (int j = i + 1; j < n; j++) {
+                suffix.add(nums[j]);
+            }
+            
+            
+            res[i] = prefix.size() - suffix.size();
+        }
+        
+        return res;
+    }
+}
+
+class Solution {
+    public boolean isGood(int[] nums) {
+    
+        Arrays.sort(nums);
+        
+        int max = nums[nums.length -1];
+          int[] freq = new int[max+1];
+        if(nums.length < max+1)  return false;
+        for(int i : nums) {
+        freq[i] ++;
+        }
+        for(int i=0;i<max-1;i++) {
+            if(freq[i] >1) return false;
+        }
+       return freq[max] == 2;
+    }
+}
+
+class Solution {
+    public int findLucky(int[] arr) {
+        int[] freq = new int[501];
+        for(int i : arr) {
+            freq[i]++;
+        }
+       int l = -1;
+        for(int i =1;i<=500;i++) {
+       if(freq[i] == i)
+            l = i;
+        }
+        return l;
+    }
+}
+
+class Solution {
+    public int arraySign(int[] nums) {
+        int n =0;
+        int p = 0;
+        for(int i : nums) {
+            if(i ==0) return 0;
+            if(i<0) n++;
+        }
+        return (n%2 ==0) ? 1 : -1;
+    }
+}
+
+class Solution {
+    public int findMiddleIndex(int[] nums) {
+        int tot = 0;
+        for(int i : nums) {
+            tot+=i;
+        }
+        int ls =0;
+        for(int i =0;i<nums.length;i++) {
+            if(ls == tot - ls - nums[i]) return i;
+            ls+=nums[i];
+        }
+        return -1;
+    }
+}
+
+class Solution {
+    int gcd(int a,int b){
+        if(b!=0) {
+            return gcd(b,a % b);
+        }
+        else return a;
+    }
+    public int findGCD(int[] nums) {
+        Arrays.sort(nums);
+        int a = nums[0];
+        int b = nums[nums.length-1];
+        int ans = gcd(a,b);
+        return ans;
+    }
+}

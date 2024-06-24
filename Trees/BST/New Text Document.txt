@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createnode(int x) {
+    struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode->data = x;
+    newnode->left = newnode->right = NULL;
+    return newnode;
+}
+
+struct Node* insert(struct Node* root, int x) {
+    if (root == NULL) return createnode(x);
+
+    if (x < root->data) {
+        root->left = insert(root->left, x);
+    } else {
+        root->right = insert(root->right, x);
+    }
+    return root;
+}
+
+void inorder(struct Node* root) {
+    if (root == NULL) return;
+    inorder(root->left);
+    printf("%d ", root->data);
+    inorder(root->right);
+}
+
+void findinorder(struct Node* root, int* arr, int* i) {
+    if (root == NULL) return;
+    findinorder(root->left, arr, i);
+    arr[(*i)++] = root->data;
+    findinorder(root->right, arr, i);
+}
+
+void intersection(int* arr, int size1, int* brr, int size2) {
+    int i = 0, j = 0;
+    while (i < size1 && j < size2) {
+        if (arr[i] < brr[j]) {
+            i++;
+        } else if (arr[i] > brr[j]) {
+            j++;
+        } else {
+            printf("%d ", arr[i]);
+            i++;
+            j++;
+        }
+    }
+}
+
+void common(struct Node* root1, struct Node* root2) {
+    int arr[100];  
+    int brr[100];  
+    int i = 0, j = 0;
+    findinorder(root1, arr, &i);
+    findinorder(root2, brr, &j);
+
+    printf("Common nodes: ");
+    intersection(arr, i, brr, j);
+    printf("\n");
+}
+
+int main() {
+    struct Node* root1 = NULL;
+    struct Node* root2 = NULL;
+    int x;
+
+    printf("Enter the elements of the first tree (-1 to end):\n");
+    while (1) {
+        scanf("%d", &x);
+        if (x == -1) break;
+        root1 = insert(root1, x);
+    }
+
+    printf("Enter the elements of the second tree (-1 to end):\n");
+    while (1) {
+        scanf("%d", &x);
+        if (x == -1) break;
+        root2 = insert(root2, x);
+    }
+
+    printf("Inorder traversal of the first tree:\n");
+    inorder(root1);
+    printf("\n");
+
+    printf("Inorder traversal of the second tree:\n");
+    inorder(root2);
+    printf("\n");
+
+    common(root1, root2);
+
+  
+
+    return 0;
+}

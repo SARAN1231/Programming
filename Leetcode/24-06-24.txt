@@ -1,0 +1,96 @@
+class Solution {
+    public String kthDistinct(String[] arr, int k) {
+        HashMap<String,Integer> res = new HashMap<>();
+
+        for(String i : arr) {
+            res.put(i,res.getOrDefault(i,0)+1);
+        }
+        int d =0;
+        for(String i : arr) {
+            if(res.get(i) == 1)
+            {
+                d++;
+                if(d == k) return i;
+            }
+        }
+        return "";
+    }
+}
+
+class Solution {
+    public List<Integer> targetIndices(int[] nums, int target) {
+        List<Integer> res = new ArrayList<>();
+        Arrays.sort(nums);
+        for(int i =0;i<nums.length;i++) {
+            if(target == nums[i]){
+                res.add(i);
+            }
+        }
+        return res;
+    }
+}
+
+class Solution {
+    public int[] numberOfPairs(int[] nums) {
+        HashMap<Integer,Integer> res = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
+        for(int i : nums) {
+            set.add(i);
+            res.put(i,res.getOrDefault(i,0)+1);
+        }
+        int k =0,v=0;
+        for(int i : set) {
+           v = v + res.get(i)%2;
+           k = k+ res.get(i)/2;
+        }
+        int[] arr = new int[2];
+        arr[0] = 0;
+        arr[1] = 1;
+        if(nums.length >1) {
+            arr[0] = k;
+            arr[1] = v;
+        }
+        return arr;
+    }
+}
+
+class Solution {
+    public int unequalTriplets(int[] nums) {
+        int n = nums.length;
+        int count = 0;
+        for(int i =0;i<n-2;i++) {
+            for(int j =i+1;j<n;j++){
+                for(int k =j+1;k<n;k++){
+                    if((nums[i] != nums[j]) && (nums[i] != nums[k]) && (nums[j] != nums[k])) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int[] separateDigits(int[] nums) {
+        List<Integer> digitList = new ArrayList<>();
+        int j =0;
+        Stack<Integer> res = new Stack<>();
+        for(int i : nums) {
+            while(i>0) {
+                res.push(i%10);
+                i/=10;
+            }
+            while(!res.isEmpty()) {
+                digitList.add(res.pop());
+            }
+            
+
+        }
+        int[] result = new int[digitList.size()];
+        for (int i = 0; i < digitList.size(); i++) {
+            result[i] = digitList.get(i);
+        }
+        return result;
+    }
+}
