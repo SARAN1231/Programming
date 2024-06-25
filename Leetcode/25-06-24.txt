@@ -1,0 +1,90 @@
+class Solution {
+    public int repeatedNTimes(int[] nums) {
+        HashMap<Integer,Integer> res = new HashMap<>();
+        for(int i : nums) {
+            if(res.containsKey(i)) return i;
+            else res.put(i,1);
+        }
+        return -1;
+    }
+}
+
+class Solution {
+    public int largestSumAfterKNegations(int[] nums, int k) {
+        Arrays.sort(nums);
+        for(int i =0;i<nums.length && k>0;i++) {
+            if(nums[i]<0){
+            nums[i] = nums[i] * -1;
+            k--;
+        }
+          
+        }
+         Arrays.sort(nums);
+           if(k%2 == 1){
+            nums[0] = -nums[0];
+           }
+        int sum =0;
+        for(int i :nums) {
+            sum+=i;
+        }
+        return sum;
+    }
+}
+
+class Solution {
+    public double trimMean(int[] arr) {
+        int count = 0;
+        int sum = 0;
+        Arrays.sort(arr);
+        int trim = (int)(arr.length*0.05);
+        for(int i =trim;i<arr.length -trim;i++) {
+            count++;
+            sum+=arr[i];
+        }
+        return (double)sum/count;
+    }
+}
+
+class Solution {
+    public int[] createTargetArray(int[] nums, int[] index) {
+        
+        List<Integer> res = new ArrayList<>();
+
+        for(int i =0;i<nums.length;i++) {
+            res.add(index[i],nums[i]);
+        }
+        int[] target = new int[res.size()];
+        for(int i = 0;i<res.size();i++){
+            target[i] = res.get(i);
+        }
+            return target;
+    }
+}
+
+class Solution {
+    public String firstPalindrome(String[] words) {
+        for(String w : words) {
+            int i;
+            for( i=0;i<w.length()/2;i++){
+               if( w.charAt(i) == w.charAt(w.length()-i-1)) continue;
+               else break;
+            }
+            if(i>=w.length()/2) return w;
+        }
+        return "";
+    }
+}
+
+class Solution {
+    public int minimumOperations(int[] nums) {
+        if(nums[0] == 0 && nums.length == 1) return 0;
+        if(nums.length == 1) return 1;
+       HashSet<Integer> res = new HashSet<>();
+
+       for(int i : nums) {
+        if(i ==0)continue;
+        res.add(i);
+       }
+       return res.size();
+    }
+}
