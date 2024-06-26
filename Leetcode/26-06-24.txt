@@ -1,0 +1,109 @@
+class Solution {
+    public int minimumRightShifts(List<Integer> nums) {
+       int breakindex = -1;
+       int n = nums.size();
+       for(int i=1;i<n;i++) {
+        if(nums.get(i)<nums.get(i-1)){
+            breakindex = i;
+            break;
+        }
+       }
+       if(breakindex == -1) return 0;
+       for(int i = breakindex+1;i<n;i++){
+        if(nums.get(i)<nums.get(i-1)) return -1;
+       }
+          if(nums.get(n-1) > nums.get(0)) return -1;
+        return n-breakindex;
+    }
+}
+
+class Solution {
+    public int addedInteger(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        return (nums2[0] - nums1[0]);
+    }
+}
+
+class Solution {
+    public boolean isPrefixString(String s, String[] words) {
+        StringBuilder current = new StringBuilder();
+        
+        for (String word : words) {
+            current.append(word);
+            if (current.length() == s.length()) {
+                return current.toString().equals(s);
+            } else if (current.length() > s.length()) {
+                return false;
+            }
+        }
+        
+        return false;
+    }
+}
+
+class Solution {
+    public int countPairs(int[] nums, int k) {
+       int n = nums.length;
+        int c =0;
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                  if(nums[i] == nums[j] && (i*j)%k ==0) c++;
+            }
+        }
+        return c;
+    }
+}
+
+class Solution {
+    public int mostFrequent(int[] nums, int key) {
+        HashMap<Integer,Integer> res = new HashMap<>();
+
+       for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == key) {
+                int nextElement = nums[i + 1];
+                res.put(nextElement, res.getOrDefault(nextElement, 0) + 1);
+            }
+        }
+        int max = 0;
+        int element =-1;
+        for(Map.Entry<Integer,Integer>entry : res.entrySet()){
+            int k = entry.getKey();
+            int v = entry.getValue();
+            if(v > max) {
+                max = v;
+                element = k;
+            }
+        }
+        return element;
+    }
+}
+
+class Solution {
+    public int maximumValue(String[] strs) {
+        int max =0;
+        
+        for(String s : strs){
+            boolean  isNumeric = true;
+            for(int i=0;i<s.length();i++){ 
+                 if (!Character.isDigit(s.charAt(i))) {
+                    isNumeric = false;
+                    break;
+                }
+            }
+          
+             if(isNumeric) {
+                if(Integer.parseInt(s) > max) {
+                    max = Integer.parseInt(s);
+                }
+            }
+                else {
+                    if(s.length() > max) {
+                        max = s.length();
+                    }
+               
+                }     
+            }
+     return max;
+    }
+}
