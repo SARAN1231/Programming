@@ -1,0 +1,42 @@
+class Solution {
+    public boolean canBeIncreasing(int[] nums) {
+      
+        int n = nums.length;
+        for(int i =0;i<n;i++){
+        List<Integer> res = new ArrayList<>();
+          for(int j=0;j<n;j++){
+            if(i!=j) {
+                res.add(nums[j]);
+            }
+          }
+         boolean flag = true;
+            for(int j=0;j< res.size() - 1;j++){
+                if(res.get(j) >= res.get(j+1)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) {
+              return true;
+            }
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public int differenceOfSum(int[] nums) {
+        int esum = 0;
+        for(int i : nums) {
+            esum+=i;
+        }
+        int  dsum =0;
+        for(int i : nums) {
+            while(i>0){
+                dsum+=i%10;
+                i/=10;
+            }
+        }
+        return Math.abs(dsum-esum);
+    }
+}
