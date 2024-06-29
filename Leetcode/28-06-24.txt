@@ -1,0 +1,60 @@
+class Solution {
+    public List<Integer> intersection(int[][] nums) {
+        HashMap<Integer,Integer> res = new HashMap<>();
+        List<Integer> ans = new ArrayList<>();
+        for(int i=0;i<nums.length;i++) {
+            for(int j =0;j<nums[i].length;j++){
+                res.put(nums[i][j],res.getOrDefault(nums[i][j],0)+1);
+            }
+        }
+        for(Map.Entry<Integer,Integer> entry : res.entrySet()){
+            if(entry.getValue()>=nums.length) {
+                ans.add(entry.getKey());
+                
+            }
+        }
+        Collections.sort(ans);
+        return ans ;
+    }
+}
+
+class Solution {
+    public int arrangeCoins(int n) {
+        
+        for(int i =1;i<=n;i++){
+            n=n-i;
+            if(n<=i) return i;
+        }
+        return 0;
+    }
+}
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer> res1 = new HashMap<>();
+        HashMap<Integer,Integer> res2 = new HashMap<>();
+        for(int i : nums1){
+            res1.put(i,res1.getOrDefault(i,0)+1);
+        }
+        for(int i : nums2){
+            res2.put(i,res2.getOrDefault(i,0)+1);
+        }
+        List<Integer> ans = new ArrayList<>();
+        for(Map.Entry<Integer,Integer> entry : res1.entrySet()){
+            if(res2.containsKey(entry.getKey())){
+                int n = res2.get(entry.getKey());
+                if(res1.get(entry.getKey()) < res2.get(entry.getKey())){
+                n = res1.get(entry.getKey());
+                }
+                for(int i =0;i<n;i++) {
+                    ans.add(entry.getKey());
+                }
+            }
+        }
+        int[] res = new int[ans.size()];
+        for(int i=0;i<ans.size();i++){
+            res[i] = ans.get(i);
+        }
+        return res;
+    }
+}
