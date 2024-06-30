@@ -1,0 +1,90 @@
+class Solution {
+    public int minMovesToSeat(int[] seats, int[] students) {
+        Arrays.sort(seats);
+        Arrays.sort(students);
+        int n = seats.length;
+        int sum =0;
+        for(int i =0;i<n;i++) {
+            sum = sum + Math.abs(seats[i]-students[i]);
+        }
+        return sum;
+    }
+}
+
+class Solution {
+    public int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
+        int count =0;
+        for(int i =0;i<hours.length;i++) {
+            if(hours[i] >= target) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        int [] arr = new int[candies.length];
+        for(int i =0;i<candies.length;i++) {
+            arr[i] = candies[i];
+        }
+        Arrays.sort(candies);
+        int maxc = candies[candies.length-1];
+        List<Boolean> res = new ArrayList<>();
+        for(int i : arr) {
+            if(i+extraCandies>=maxc) res.add(true);
+            else res.add(false);
+        }
+        return res;
+    }
+}
+
+class Solution {
+    public int countPairs(List<Integer> nums, int target) {
+        int count = 0;
+        for(int i =0;i<nums.size()-1;i++){
+            for(int j=i+1;j<nums.size();j++){
+                if(nums.get(i) + nums.get(j) < target) count++;
+            }
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int numberOfPairs(int[] nums1, int[] nums2, int k) {
+        int count =0;
+        for(int i =0; i<nums1.length;i++){
+            for(int j =0;j<nums2.length;j++) {
+                if(nums1[i] % (nums2[j]*k) == 0) count ++;
+            }
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] temp = new int[nums.length];
+       List<Integer> res = new ArrayList<>();
+        for(int i =0;i<nums.length;i++) {
+            temp[i] = nums[i];
+        }
+        Arrays.sort(temp);
+        for(int i =0;i<nums.length;i++) {
+            int count = 0;
+            for(int j=0;j<nums.length;j++) {
+                if(temp[j] < nums[i]) count++;
+                else break;
+            }
+            res.add(count);
+        }
+
+        int[] ans = new int[res.size()];
+        for(int i =0;i<res.size();i++) {
+            ans[i] = res.get(i);
+        }
+        return ans;
+    }
+}
