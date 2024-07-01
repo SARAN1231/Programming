@@ -1,0 +1,153 @@
+class Solution {
+    public int mostWordsFound(String[] sentences) {
+        int count = 0;
+        for(String s : sentences){
+            String[] ss = s.split(" ");
+            count = Math.max(count,ss.length);
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int[] leftRightDifference(int[] nums) {
+       
+        int[]ans = new int[nums.length];
+        int n =0;
+        for(int i=0;i<nums.length;i++) {
+         int ls =0;
+        int rs =0;
+            for(int j =i+1;j<nums.length;j++){
+                rs = rs+nums[j];
+            }
+            for(int k=0;k<i;k++ ){
+                ls = ls+nums[k];
+            }
+            ans[n++] = Math.abs(ls-rs);
+        }
+        return ans;
+    }
+}
+
+class Solution {
+    public int sumIndicesWithKSetBits(List<Integer> nums, int k) {
+        int sum =0;
+        for(int i=0;i<nums.size();i++) {
+            String b = Integer.toBinaryString(i);
+            int count =0;
+            for(int j = 0;j<b.length();j++){
+                if(b.charAt(j) =='1')count++;
+            }
+            if(count == k) {
+                sum+=nums.get(i);
+            }
+        }
+        return sum;
+    }
+}
+
+class Solution {
+    public int[] decompressRLElist(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        
+        for(int i=0;i<nums.length;i++){
+            if(2*i+1 > nums.length) break;
+            int freq = nums[2*i];
+            int val = nums[2*i+1];
+            for(int j =0;j<freq;j++){
+                res.add(val);
+            }
+        }
+        int[] ans = new int[res.size()];
+        for(int i=0;i<res.size();i++){
+            ans[i] = res.get(i);
+        }
+        return ans;
+    }
+}
+
+class Solution {
+    public int[] numberGame(int[] nums) {
+        Arrays.sort(nums);
+        int[] res = new int[nums.length];
+        for(int i=0;i<nums.length;i=i+2){
+            res[i] = nums[i+1];
+            res[i+1] = nums[i];
+        }
+        return res;
+    }
+}
+
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        Arrays.sort(nums);
+        int count =0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i] < k) count++;
+            else if(nums[i] == k) break;
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public String truncateSentence(String s, int k) {
+        StringBuilder ans = new StringBuilder();
+       
+            String[] a = s.split(" ");
+            for(int i=0;i<k;i++) {
+                if(i==k-1)    ans.append(a[i]);
+                else
+                ans.append(a[i]+" ");
+            }
+  
+        return ans.toString();
+    }
+}
+
+class Solution {
+    public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+        int s;
+        int count =0;
+         if(ruleKey.charAt(0) == 't') {
+                s =0;
+            }
+            else if(ruleKey.charAt(0) == 'c'){
+                s=1;
+            }
+            else s = 2;
+           
+         for(List<String> item:items){
+
+           if(item.get(s).equals(ruleValue))count++;
+         }
+    
+        return count;
+    }
+}
+
+class Solution {
+    public String restoreString(String s, int[] indices) {
+        char[] ans = new char[indices.length];
+        int j =0;
+        for(int i : indices) {
+            ans[i] = s.charAt(j++);
+        }
+        return new String(ans);
+    }
+}
+
+class Solution {
+    public double minimumAverage(int[] nums) {
+        Arrays.sort(nums);
+        int l =0;
+        int r = nums.length-1;
+        double avg = Double.MAX_VALUE;
+        while(l<r) {
+           avg = Math.min(avg,(nums[l]+nums[r])/2.0);
+           l++;
+           r--;
+        }
+        return avg;
+    }
+}
