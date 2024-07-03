@@ -1,0 +1,70 @@
+class Solution {
+    public int maxProductDifference(int[] nums) {
+        Arrays.sort(nums);
+
+        int min = nums[0]*nums[1];
+        int max = nums[nums.length-1]*nums[nums.length-2];
+        return max - min;
+    }
+}
+
+class Solution {
+    public int sumCounts(List<Integer> nums) {
+        int sum =0;
+        for(int i=0;i<nums.size();i++){
+            HashSet<Integer> res = new HashSet<>();
+            for(int j=i;j<nums.size();j++) {
+                res.add(nums.get(j));
+                sum+= Math.pow(res.size(),2);
+            }
+        }
+        return sum;
+    }
+}
+
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        for(int i =0;i<image.length;i++){
+            int n = image[i].length;
+            int l =0;
+            int r = n-1;
+            while(l<r){
+                int temp = image[i][r];
+                image[i][r] = image[i][l];
+                image[i][l] = temp;
+                l++;
+                r--;
+            }
+            for(int j = 0;j<image[i].length;j++){
+                if(image[i][j] == 0) {
+                    image[i][j] = 1;
+                }
+                else {
+                    image[i][j] = 0;
+                }
+            }
+        }
+        return image;
+    }
+}
+class Solution {
+    public int maximizeSum(int[] nums, int k) {
+        Arrays.sort(nums);
+        int sum =0;
+        for(int i =0;i<k;i++){
+            sum+=nums[nums.length-1];
+            nums[nums.length-1] = ++nums[nums.length-1];
+        }
+        return sum;
+    }
+}class Solution {
+    public int maximizeSum(int[] nums, int k) {
+        Arrays.sort(nums);
+        int sum =0;
+        for(int i =0;i<k;i++){
+            sum+=nums[nums.length-1];
+            nums[nums.length-1] = ++nums[nums.length-1];
+        }
+        return sum;
+    }
+}
