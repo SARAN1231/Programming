@@ -1,0 +1,50 @@
+class Solution {
+    public int countTestedDevices(int[] nums) {
+        int count =0;
+        for(int i=0;i<nums.length;i++) {
+            if(nums[i] > 0) {
+                count++;
+                for(int j=i+1;j<nums.length;j++) {
+                    nums[j] =Math.max(0,nums[j]-1);
+                }
+            }
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        List<List<Integer>> answer = new ArrayList<>();
+        List<Integer> res1 = new ArrayList<>();
+        List<Integer> res2 = new ArrayList<>();
+
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        for (int num : nums2) {
+            set2.add(num);
+        }
+
+        for (int num : set1) {
+            if (!set2.contains(num)) {
+                res1.add(num);
+            }
+        }
+
+        for (int num : set2) {
+            if (!set1.contains(num)) {
+                res2.add(num);
+            }
+        }
+
+        answer.add(res1);
+        answer.add(res2);
+
+        return answer;
+    }
+}
