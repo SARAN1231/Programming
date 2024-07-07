@@ -1,0 +1,165 @@
+import java.util.*;
+
+class Digit {
+    HashMap<Integer,Integer> res = new HashMap<>();
+    int count =0;
+    public  int uniqdigit(int n) {
+        while(n>0) {
+            int r = n%10;
+            n/=10;
+            res.put(r,res.getOrDefault(r,0)+1);
+        }
+        
+        for(Map.Entry<Integer,Integer> entry : res.entrySet()){
+            int v = entry.getValue();
+            if(v <2) count++;
+        }
+          return count;
+    }
+}
+
+public  class Main
+{
+    
+	public static void main(String[] args) {
+	  Scanner sc = new Scanner(System.in);
+	  int n = sc.nextInt();
+	  Digit ans =  new Digit();
+	  int v =ans.uniqdigit(n);
+	  System.out.print(v);
+	}
+}
+
+
+import java.util.*;
+
+class Digit {
+    HashMap<Integer,Integer> res = new HashMap<>();
+    int count =0;
+    public  int uniqdigit(int n) {
+        while(n>0) {
+            int r = n%10;
+            n/=10;
+            res.put(r,res.getOrDefault(r,0)+1);
+        }
+        
+        for(Map.Entry<Integer,Integer> entry : res.entrySet()){
+            int v = entry.getValue();
+            if(v <2) {
+                count+=entry.getKey();
+            }
+        }
+          return count;
+    }
+}
+
+public  class Main
+{
+    
+	public static void main(String[] args) {
+	  Scanner sc = new Scanner(System.in);
+	  int n = sc.nextInt();
+	  Digit ans =  new Digit();
+	  int v =ans.uniqdigit(n);
+	  System.out.print(v);
+	}
+}
+
+import java.util.*;
+
+class Digit {
+   public int uniqdigit(int r,int w,int inc ) {
+       int count =0;
+       for(int i =1;i<=r;i++){
+           for(int j=1;j<=i;j++) {
+               int k = w;
+              count = count + k;
+               if(j==i) w = w+inc;
+           }
+       }
+       return count ;
+   }
+}
+
+public  class Main
+{
+    
+	public static void main(String[] args) {
+	  Scanner sc = new Scanner(System.in);
+	  int r = sc.nextInt();
+	  int w = sc.nextInt();
+	  int inc = sc.nextInt();
+	  Digit ans =  new Digit();
+        int v = ans.uniqdigit(r,w,inc);
+	  System.out.print(v);
+	}
+}
+
+import java.util.*;
+
+class Digit {
+    public void uniqdigit(int a, int b, int c) {
+        List<Integer> digits = new ArrayList<>(Arrays.asList(
+            a % 10, (a / 10) % 10, (a / 100) % 10,
+            b % 10, (b / 10) % 10, (b / 100) % 10,
+            c % 10, (c / 10) % 10, (c / 100) % 10
+        ));
+         System.out.println(digits);
+
+        int unitMin = Math.min(a % 10, Math.min(b % 10, c % 10));
+        int tensMin = Math.min((a / 10) % 10, Math.min((b / 10) % 10, (c / 10) % 10));
+        int hundredsMin = Math.min((a / 100) % 10, Math.min((b / 100) % 10, (c / 100) % 10));
+        int maxDigit = Collections.max(digits);
+
+        int pin = maxDigit * 1000 + hundredsMin * 100 + tensMin * 10 + unitMin;
+        System.out.println(pin);
+    }
+}
+public  class Main
+{
+    
+	public static void main(String[] args) {
+	  Scanner sc = new Scanner(System.in);
+	  int a = sc.nextInt();
+	  int b = sc.nextInt();
+	  int c = sc.nextInt();
+	  Digit ans =  new Digit();
+        ans.uniqdigit(a,b,c);
+	  
+	}
+}
+
+import java.util.*;
+
+class Digit {
+    public void uniqdigit(int n) {
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i=1;i<=n;i++) {
+            List<Integer> ans = new ArrayList<>();
+            int sum =0;
+            for(int j=i;j<=n;j++) {
+                ans.add(j);
+                sum+=j;
+                if(sum == n) {
+                    res.add(ans);
+                    break;
+                }
+            }
+            
+        }
+       System.out.print(res);
+        
+    }
+}
+public  class Main
+{
+    
+	public static void main(String[] args) {
+	  Scanner sc = new Scanner(System.in);
+	  int n = sc.nextInt();
+	
+	  Digit ans =  new Digit();
+        ans.uniqdigit(n);
+	  
+	}
+}
