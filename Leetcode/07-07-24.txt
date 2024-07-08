@@ -163,3 +163,18 @@ public  class Main
 	  
 	}
 }
+
+class Solution {
+    public int sumOfUnique(int[] nums) {
+        HashMap<Integer,Integer> res = new HashMap<>();
+        int sum =0;
+        for(int i : nums) {
+            res.put(i,res.getOrDefault(i,0)+1);
+        }
+        for(Map.Entry<Integer,Integer> entry : res.entrySet()) {
+            int v = entry.getValue();
+            if(v == 1) sum+=entry.getKey();
+        }
+        return sum;
+    }
+}
