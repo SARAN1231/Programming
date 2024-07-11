@@ -1,0 +1,83 @@
+class Solution {
+    public String[] sortPeople(String[] names, int[] height) {
+        
+        for(int i =0;i<names.length-1;i++){
+           for(int j=i+1;j<names.length;j++) {
+                if(height[i] < height[j]){
+                    int tem = height[i];
+                    height[i] = height[j];
+                    height[j] = tem;
+                    String temp = names[i];
+                    names[i] = names[j];
+                    names[j] = temp;
+                }
+            }
+        }
+        return names;
+    }
+}class Solution {
+    public int countSeniors(String[] details) {
+        int i=11;
+       
+        int count =0;
+        for(String ss : details){
+             StringBuilder s = new StringBuilder();
+             s.append(ss.charAt(11));
+             s.append(ss.charAt(12));
+             int a = Integer.parseInt(s.toString());
+             if(a>60) count++;
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int findNonMinOrMax(int[] nums) {
+        Arrays.sort(nums);
+        if(nums.length  <=2) return -1;
+        return nums[1];
+    }
+}
+
+class Solution {
+    public int calPoints(String[] ops) {
+        List<Integer> ans = new ArrayList<>();
+         for (String c : ops) {
+        int n = ans.size();
+       switch(c) {
+        case "C" :{
+            if(n>0) {
+                ans.remove(n-1);
+            }
+        }
+        break;
+        case "D" : {
+            if(n>0) {
+                ans.add(2*(ans.get(n-1)));
+            }
+          
+        }
+            break;
+        case "+" : {
+            if (n > 1) {
+                ans.add(ans.get(n - 1) + ans.get(n - 2));
+            } else if (n == 1) {
+                ans.add(ans.get(n - 1));
+            }
+                  
+        }
+          break;
+          default :
+          {
+            ans.add(Integer.parseInt(c));
+          }
+       }
+       
+    }
+        int sum =0;
+    for(int i : ans) {
+        sum+=i;
+    }
+    return sum;
+    }
+}
