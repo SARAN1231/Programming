@@ -1,0 +1,25 @@
+class Solution {
+    public int countGoodRectangles(int[][] rectangles) {
+        int[] res = new int[rectangles.length];
+        int i=0;
+        for(int[] arr:rectangles) {
+            res[i++] = Math.min(arr[0],arr[1]);
+        }
+        Arrays.sort(res);
+        int count =0;
+        int max = res[res.length-1];
+        for(int s : res) {
+            if(s==max) count++;
+        }
+        return count;
+    }
+}
+class Solution {
+    public int busyStudent(int[] s, int[] e, int q) {
+        int count =0;
+        for(int i=0;i<s.length;i++){
+            if(s[i]<=q && e[i] >=q) count++;
+        }
+        return count;
+    }
+}

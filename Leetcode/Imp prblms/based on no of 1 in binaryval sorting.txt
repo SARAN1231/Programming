@@ -1,0 +1,62 @@
+import java.util.Arrays;
+
+public class SortByBits {
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+        int[] sortedArr = sortByBits(arr);
+        System.out.println(Arrays.toString(sortedArr));
+    }
+
+    public static int[] sortByBits(int[] arr) {
+        return Arrays.stream(arr)
+                .boxed()
+                .sorted((a, b) -> {
+                    int countA = Integer.bitCount(a); // Step 1: Get the count of 1's in binary representation of a
+                    int countB = Integer.bitCount(b); // Step 1: Get the count of 1's in binary representation of b
+                    if (countA == countB) { // Step 2: If counts are equal
+                        return Integer.compare(a, b); // Step 3: Sort by integer value
+                    } else {
+                        return Integer.compare(countA, countB); // Step 4: Otherwise, sort by count of 1's
+                    }
+                })
+                .mapToInt(i -> i) // Convert the Stream<Integer> back to an int array
+                .toArray(); // Collect into an array
+    }
+}
+
+
+Step-by-Step Process
+Initial Array:
+
+csharp
+Copy code
+[0, 1, 2, 3, 4, 5, 6, 7, 8]
+Convert each integer to binary and count the number of 1's:
+
+Integer	Binary	Count of 1's
+0	0000	0
+1	0001	1
+2	0010	1
+3	0011	2
+4	0100	1
+5	0101	2
+6	0110	2
+7	0111	3
+8	1000	1
+
+Group integers by the count of 1's:
+0 bits: [0]
+1 bit: [1, 2, 4, 8]
+2 bits: [3, 5, 6]
+3 bits: [7]
+
+Sort each group by their integer value in ascending order:
+
+0 bits: [0]
+1 bit: [1, 2, 4, 8]
+2 bits: [3, 5, 6]
+3 bits: [7]
+
+Concatenate the sorted groups to form the final sorted array:
+
+Final sorted array: [0, 1, 2, 4, 8, 3, 5, 6, 7]
