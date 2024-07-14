@@ -1,0 +1,150 @@
+class Solution {
+    public int[] finalPrices(int[] prices) {
+        for(int i=0;i<prices.length-1;i++) {
+            for(int j=i+1;j<prices.length;j++) {
+                if(prices[j] <= prices[i]) {
+                    prices[i] = prices[i] - prices[j];
+                    break;
+                }
+            }
+        }
+        return prices;
+    }
+}
+
+class Solution {
+    public int deleteGreatestValue(int[][] grid) {
+        List<List<Integer>> res= new ArrayList<>();
+        for(int[] arr : grid) {
+            List<Integer> res1 = new ArrayList<>();
+            for(int i=0;i<arr.length;i++) {
+                res1.add(arr[i]);
+            }
+            Collections.sort(res1);
+            res.add(res1);
+        }
+        int sum =0;
+        while(!res.isEmpty() && !res.get(0).isEmpty()){
+            int maxVal = Integer.MIN_VALUE;
+            for(List<Integer> list : res) {
+               int currmax = list.get(list.size()-1);
+               if(currmax > maxVal) {
+                maxVal = currmax;
+               }
+                list.remove(list.size()-1);
+            }
+            sum +=maxVal;
+        }
+        return sum;
+    }
+}
+
+class Solution {
+    public int prefixCount(String[] words, String pref) {
+        int count =0;
+        for(int i=0;i<words.length;i++) {
+            for(int j=0;j<pref.length();j++){
+                if(pref.charAt(j) != words[i].charAt(j)) break;
+                else{
+                    if(j==pref.length()-1) count++;
+                }
+            }
+        }
+        return count;
+    }
+}class Solution {
+    public int prefixCount(String[] words, String pref) {
+        int count =0;
+        for(String word : words) {
+            if(word.length() >= pref.length() && word.startsWith(pref)) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        Stack<Integer> s = new Stack<>();
+        Queue<Integer> q = new LinkedList<>();
+
+        for(int i : students) {
+            q.add(i);
+        }
+        for(int i=sandwiches.length-1;i>=0;i--) {
+            s.push(sandwiches[i]);
+        }
+        int n =0;
+        while(!q.isEmpty() && n<q.size()){
+            if(q.peek() != s.peek()) {
+                q.add(q.remove());
+                n++;
+            }
+            else {
+                q.remove();
+                s.pop();
+                n=0;
+            }
+        }
+        return q.size();
+    }
+}
+
+class Solution {
+    public int findNumbers(int[] nums) {
+        int ecount =0;
+        for(int num : nums) {
+            int count =0;
+            while(num > 0) {
+                num=num/10;
+                count++;
+            }
+            if(count % 2==0) ecount++;
+        }
+        return ecount;
+    }
+}
+
+class Solution {
+    public List<List<Integer>> mergeSimilarItems(int[][] items1, int[][] items2) {
+        TreeMap<Integer,Integer> res = new TreeMap<>();
+        for(int[] arr : items1) {
+            res.put(arr[0],res.getOrDefault(arr[0],0)+arr[1]);
+        }
+        for(int[] arr : items2){
+            res.put(arr[0],res.getOrDefault(arr[0],0)+arr[1]);
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        for(Map.Entry<Integer,Integer> entry : res.entrySet()){
+            ans.add(Arrays.asList(entry.getKey(),entry.getValue()));
+        }
+        return ans;
+    }   
+}
+
+class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+       int n = grid.length;
+        int[] ans = new int[2];
+        int[] freq = new int[n * n + 1]; 
+
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                freq[grid[i][j]]++;
+            }
+        }
+
+        
+        for (int i = 1; i <= n * n; i++) { 
+            if (freq[i] == 0) {
+                ans[1] = i; 
+            } else if (freq[i] == 2) {
+                ans[0] = i; 
+            }
+        }
+
+        return ans;
+    }
+}
