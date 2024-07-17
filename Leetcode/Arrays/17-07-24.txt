@@ -1,0 +1,76 @@
+class Solution {
+    public int sumOfEncryptedInt(int[] nums) {
+        
+        int sum =0;
+        for(int i : nums) {
+            int count =0;
+             int max =0;
+            while(i > 0) {
+                int r = i%10;
+                count++;
+                max = Math.max(max,r);
+                i/=10;
+            }
+            
+            int e = 0;
+            for(int j=0;j<count;j++) {
+                e = e*10+max;
+            }
+            sum+=e;
+           
+        }
+        return sum;
+    }
+}
+
+class Solution {
+    public int vowelStrings(String[] words, int left, int right) {
+        int count =0;
+        for(int i=left;i<=right;i++) {
+            if(isVowel(words[i].charAt(0)) && isVowel(words[i].charAt(words[i].length()-1))){
+                count++;
+            }
+        }
+        return count;
+    }
+
+     public boolean isVowel(char ch){
+        if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'){
+            return true;
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public List<String> splitWordsBySeparator(List<String> words, char separator) {
+        List<String> ans = new ArrayList<>();
+        for(String s : words) {
+            String[] ss = s.split("\\Q" + separator + "\\E");
+            for(String a : ss) {
+                if(!a.isEmpty())
+                ans.add(a);
+            }
+        }
+        return ans;
+    }
+}
+
+class Solution {
+    public int findChampion(int[][] grid) {
+        
+        int maxcount = 0;
+        int a=0;
+        for(int j =0;j<grid.length;j++){
+            int count =0;
+            for(int i=0;i<grid[j].length;i++){
+                if(grid[j][i] == 1) count++;
+            }
+            if(count > maxcount) {
+                maxcount = count;
+                a = j;
+            }
+        }
+        return a;
+    }
+}
