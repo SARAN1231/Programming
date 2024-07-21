@@ -1,0 +1,77 @@
+class Solution {
+    public int[] resultArray(int[] nums) {
+        List<Integer> arr1 = new ArrayList<>();
+        List<Integer> arr2 = new ArrayList<>();
+        
+        arr1.add(nums[0]);
+        arr2.add(nums[1]);
+        for(int i=2;i<nums.length;i++) {
+            if(arr1.get(arr1.size()-1) > arr2.get(arr2.size()-1)){
+                arr1.add(nums[i]);
+            }
+            else{
+                arr2.add(nums[i]);
+            }
+        }
+        int n = arr1.size() + arr2.size();
+        int[] ans = new int[n];
+        int i=0;
+        for(int num : arr1){
+            ans[i++] = num;
+        }
+        for(int num : arr2){
+            ans[i++] = num;
+        }
+        return ans;
+    }
+}
+
+class Solution {
+    public boolean canBeEqual(int[] target, int[] arr) {
+        Arrays.sort(target);
+        Arrays.sort(arr);
+
+        for(int i=0;i<arr.length;i++) {
+            if(arr[i] != target[i]) return false;
+        }
+        return true;
+    }
+}	
+
+class Solution {
+    public String[] findRelativeRanks(int[] score) {
+        int[] temp = new int[score.length];
+        int i=0;
+        for(int n : score) {
+            temp[i++] = n;
+        }
+        Arrays.sort(score);
+        HashMap<Integer,String> ans = new HashMap<>();
+        int n = score.length;
+        for(int j =0;j<score.length;j++){
+            if(n==3) {
+                ans.put(score[j],"Bronze Medal");
+            }
+            else if(n==2) {
+                ans.put(score[j],"Silver Medal");
+            }
+            else if (n==1) {
+                ans.put(score[j],"Gold Medal");
+            }
+            else {
+                ans.put(score[j], String.valueOf(n));
+            }
+               n--;
+        }
+        int s =0;
+        String[] res = new String[ans.size()];
+        for(int ns : temp) {
+            for(Map.Entry<Integer,String> entry : ans.entrySet()){
+                if(ns==entry.getKey()){
+                    res[s++] = entry.getValue();
+                }
+            }
+        }
+        return res;
+    }
+}
