@@ -1,0 +1,63 @@
+class Solution {
+    public String[] sortPeople(String[] names, int[] heights) {
+        int[] temp = new int[heights.length];
+        String[] ans = new String[names.length];
+        int j =0;
+        for(int i: heights){
+            temp[j++] =  i;
+        }
+        Arrays.sort(temp);
+        for(int a =0;a<temp.length;a++){
+            for(int b =0;b<heights.length;b++) {
+                if(temp[a] == heights[b]) {
+                    ans[a] = names[b];
+                }
+            }
+        }
+        int l=0;
+        int r =names.length-1;
+        while(l<r) {
+            String  temps = ans[r];
+            ans[r] = ans[l];
+            ans[l] = temps;
+            l++;
+            r--;
+        }
+        return ans;
+    }
+}
+
+class Solution {
+    public List<Integer> luckyNumbers (int[][] matrix) {
+        List<Integer> row = new ArrayList<>();
+         List<Integer> col = new ArrayList<>();
+        for(int i=0;i<matrix.length;i++) {
+            int min = Integer.MAX_VALUE;
+            for(int j=0;j<matrix[i].length;j++) {
+                if(matrix[i][j] < min) {
+                    min = matrix[i][j];
+                }
+            }
+            row.add(min);
+        }
+
+        for( int a=0;a<matrix[0].length;a++) {
+            int max = 0;
+            for(int b=0;b<matrix.length;b++) {
+                if(matrix[b][a] > max) {
+                    max = matrix[b][a];
+                }
+            }
+            col.add(max);
+        }
+        List<Integer> ans = new ArrayList<>();
+        HashSet<Integer> minset = new HashSet<>(row);
+
+        for(int colmin : col) {
+            if(minset.contains(colmin)){
+                ans.add(colmin);
+            }
+        }
+        return ans;
+    }
+}
