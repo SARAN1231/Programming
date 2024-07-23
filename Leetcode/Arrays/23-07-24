@@ -1,0 +1,24 @@
+class Solution {
+    public int[] frequencySort(int[] nums) {
+        // Step 1: Count the frequency of each number
+        HashMap<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : nums) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Step 2: Sort the numbers based on the frequency and value
+        // Convert array to a list of Integer to use Collections.sort with custom comparator
+        Integer[] numsArray = Arrays.stream(nums).boxed().toArray(Integer[]::new);
+        Arrays.sort(numsArray, (a, b) -> {
+            int frequencyCompare = frequencyMap.get(a).compareTo(frequencyMap.get(b));
+            if (frequencyCompare != 0) {
+                return frequencyCompare; // Sort by frequency
+            } else {
+                return b.compareTo(a); // Sort by value in descending order if frequencies are the same
+            }
+        });
+
+        // Step 3: Convert the sorted list back to an array of int
+        return Arrays.stream(numsArray).mapToInt(Integer::intValue).toArray();
+    }
+}
