@@ -1,0 +1,38 @@
+class Solution {
+    public int[] shortestToChar(String s, char c) {
+       int[] ans = new int[s.length()];
+       List<Integer> ls = new ArrayList<>();
+       for(int i=0;i<s.length();i++) {
+        if(s.charAt(i) == c) ls.add(i);
+       }
+        for(int i=0;i<s.length();i++){
+            int minn=Integer.MAX_VALUE;
+            for(int j=0;j<ls.size();j++){
+                minn=Math.min(minn,Math.abs(i-ls.get(j)));
+            }
+            ans[i]=minn;
+        }
+        return ans;
+       
+    }
+}class Solution {
+    public List<List<Integer>> minimumAbsDifference(int[] arr) {
+        List<List<Integer>> ans = new ArrayList<>();
+         Arrays.sort(arr);
+        int a = Integer.MAX_VALUE;
+        for(int i=0;i<arr.length-1;i++){
+            a = Math.min(a,Math.abs(arr[i]-arr[i+1]));
+        }
+
+       for (int i = 0; i < arr.length - 1; i++) {
+            
+            if(Math.abs(arr[i]-arr[i+1]) == a) {
+                List<Integer> pair = new ArrayList<>();
+                pair.add(arr[i]);
+                pair.add(arr[i + 1]);
+                ans.add(pair);
+            }
+        }
+        return ans;
+    }
+}
