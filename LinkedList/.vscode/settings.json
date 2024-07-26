@@ -1,3 +1,7 @@
 {
-  "C_Cpp.errorSquiggles": "enabled"
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.default.compilerPath": "/home/saran/Programming/LinkedList/Practices_/sll.c",
+  "files.associations": {
+    "stdio.h": "c"
+  }
 }
