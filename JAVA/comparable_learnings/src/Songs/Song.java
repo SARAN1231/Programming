@@ -5,6 +5,18 @@ public class Song implements Comparable<Song>{
     private final String artist;
     private final Integer year;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
     @Override
     public String toString() {
         return "Song{" +

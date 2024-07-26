@@ -3,6 +3,9 @@ import java.util.Collections;
 
 import Utils.MyUtils;
 import Songs.Song;
+import mycomparator.ArtistComparator;
+import mycomparator.YearComparator;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -15,11 +18,18 @@ public class Main {
        ans.add(song3);
 
         MyUtils.iterateList(ans);
-       Collections.sort(ans);
 
-        System.out.println("After Sorting");
-
+        System.out.println("General Sorting");
+        Collections.sort(ans);
         MyUtils.iterateList(ans);
+//
+//        System.out.println("Year Sorting");
+//        Collections.sort(ans,new YearComparator());
+//        MyUtils.iterateList(ans);
+
+//        System.out.println("Artist Sorting");
+//        Collections.sort(ans,new ArtistComparator());
+//        MyUtils.iterateList(ans);
 
     }
 }
