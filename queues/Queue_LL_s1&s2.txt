@@ -1,4 +1,4 @@
-Algorithm to implement a queue using two stacks:
+-Algorithm to implement a queue using two stacks:
 
 Data Structures:
 
