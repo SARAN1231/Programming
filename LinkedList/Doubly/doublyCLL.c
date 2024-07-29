@@ -57,12 +57,14 @@ void delbeg(){
     tail->next = head;
     printf("\n");
 }
+
 void delend(){
     tail->prev->next = head;
     tail = tail->prev;
     tail->next = head;
     printf("\n");
 }
+
 void delpos(){
     int pos,i=1;
     temp = head;

@@ -26,7 +26,7 @@ void pop() {
         printf("empty");
     }
     else {
-        while(front1 != rear1) {
+        while(f-----------------) {
             q2[++rear2] = q1[front1++];
         }
         printf("%d popped",q1[front1]);

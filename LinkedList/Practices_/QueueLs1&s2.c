@@ -21,7 +21,6 @@ void enqueue() {
 void dequeue() {
     if(top1 == NULL && top2 == NULL) printf("Empty");
     if(top2 == NULL) {
-       
         while(top1 != NULL) {
             struct stack * newnode;
             newnode = (struct stack*)malloc(sizeof(struct stack));
