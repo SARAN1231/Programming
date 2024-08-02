@@ -1,0 +1,62 @@
+class Solution {
+    public String interpret(String command) {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<command.length();i++) {
+            if(command.charAt(i) == 'G'){
+                sb.append('G');
+            }
+            else if(command.charAt(i) =='(' && command.charAt(i+1) == ')'){
+                sb.append('o');
+            }
+            else if(command.charAt(i) == '(' && command.charAt(i+1) == 'a'){
+                sb.append('a');
+                sb.append('l');
+            }
+        }
+        return sb.toString();
+    }
+}
+
+class Solution {
+    public String removeOuterParentheses(String s) {
+        Stack<Character> bracket = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i++) {
+            if(s.charAt(i) == '('){
+                if(bracket.size() > 0){
+                    sb.append(s.charAt(i));
+                }
+                bracket.push(s.charAt(i));
+            }
+            else{
+                bracket.pop();
+                if(bracket.size() > 0){
+                    sb.append(s.charAt(i));
+                }
+            }
+        }
+        return sb.toString();
+    }
+}
+
+class Solution {
+    public String maximumOddBinaryNumber(String s) {
+        int ocount=0;
+        int zcount =0;
+        for(int i=0;i<s.length();i++) {
+            if(s.charAt(i) == '0')zcount++;
+            else ocount++;
+        }
+        StringBuilder sb = new StringBuilder();
+        while(ocount >1){
+            sb.append('1');
+            ocount--;
+        }
+        while(zcount >0) {
+            sb.append('0');
+            zcount--;
+        }
+        sb.append('1');
+        return sb.toString();
+    }
+}
