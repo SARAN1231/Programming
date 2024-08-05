@@ -1,0 +1,95 @@
+class Solution {
+    public String kthDistinct(String[] arr, int k) {
+        HashMap<String,Integer> map = new HashMap<>();
+        int count =0;
+        for(String s : arr) {
+            map.put(s,map.getOrDefault(s,0)+1);
+        }
+        for(String s :arr){
+            if(map.get(s)==1){
+                count++;
+                if(count == k){
+                    return s;
+                }
+            }
+        }
+        return "";
+    }
+}
+
+class Solution {
+    public int numOfStrings(String[] patterns, String word) {
+        int c =0;
+        for(String s : patterns){
+            if(word.contains(s))c++;
+        }
+        return c;
+    }
+}
+
+class Solution {
+    public int countPoints(String rings) {
+        HashMap<Integer,int[]> ans = new HashMap<>();
+        for(int i=1;i<rings.length();i++){
+            if(i%2 != 0){
+                int a= rings.charAt(i) - '0';
+                char c = rings.charAt(i-1);
+                ans.putIfAbsent(a,new int[3]);
+                 int[] res = ans.get(a);
+                if(c == 'R'){
+                   res[0] = ++res[0];
+                }
+                else if(c == 'G'){
+                    res[1] = ++res[1];
+                }
+                else {
+                    res[2] = ++res[2];
+                }
+                
+            }
+        }
+
+int c = 0;
+        for(int[] s : ans.values()){
+            if(s[0] >=1 && s[1] >= 1 && s[2] >= 1){
+                c++;
+            }
+        }
+        return c;
+    }
+}
+
+class Solution {
+    public int countKeyChanges(String s) {
+        s = s.toLowerCase();
+        int c =0;
+        for(int i=0;i<s.length()-1;i++) {
+            if(s.charAt(i) != s.charAt(i+1))c++;
+        }
+        return c;
+    }
+}
+
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        int n1 = word1.length();
+        int n2 = word2.length();
+        StringBuilder sb = new StringBuilder();
+        int i= 0;
+        int j =0;
+        while(i<n1 && j<n2) {
+            sb.append(word1.charAt(i++));
+            sb.append(word2.charAt(j++));
+        }
+        if(n1 > n2){
+            while(i<n1){
+                 sb.append(word1.charAt(i++));
+            }
+        }else if(n2>n1){
+              while(j<n2){
+                 sb.append(word2.charAt(j++));
+            }              
+        }
+        return sb.toString();
+    }
+}
