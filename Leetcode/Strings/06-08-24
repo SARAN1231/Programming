@@ -1,0 +1,62 @@
+class Solution {
+    public String freqAlphabets(String s) {
+    
+        StringBuilder ans = new StringBuilder();
+        int i = s.length()-1;
+        while(i>=0){
+            if(s.charAt(i) == '#'){
+               
+                int v =Integer.parseInt(s.substring(i-2,i));
+                char c = (char) (96 + v);
+                ans.append(c);
+                i=i-3;
+            }
+            else{
+                int v = s.charAt(i) -'0';
+                char c = (char) (96 + v);
+                ans.append(c);
+                i--;
+            }
+
+        }
+        ans.reverse();
+        return ans.toString();
+    }
+}
+
+class Solution {
+    public String removeTrailingZeros(String num) {
+        int a=0;
+        for(int i = num.length()-1;i>=0;i--){
+            if(num.charAt(i)!='0'){
+                a = i;
+                break;
+            }
+        }
+        return num.substring(0,a+1);
+    }
+}
+
+class Solution {
+    public boolean squareIsWhite(String c) {
+        if(c.charAt(0)%2 == 1){
+            int v = c.charAt(1)-'0';
+            if(v%2 == 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            int v = c.charAt(1)-'0';
+            if(v%2 == 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        
+    }
+}
