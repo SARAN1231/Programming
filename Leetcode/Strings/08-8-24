@@ -1,0 +1,60 @@
+class Solution {
+    public int countGoodSubstrings(String s) {
+        int count =0;
+        for(int i=0;i<s.length()-2;i++){
+            String ss = s.substring(i,i+3);
+            HashSet<Character> set = new HashSet<>();
+            for(char c : ss.toCharArray()){
+                set.add(c);
+            }
+            if(set.size() == 3) count++;
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int canBeTypedWords(String text, String b) {
+        int count =0;
+        String[] str = text.split(" ");
+        for(String s :str){
+            for(int i=0;i<b.length();i++){
+                if(s.indexOf(b.charAt(i)) != -1) {
+                    count++;
+                    break;
+                }
+            }
+        }
+        return str.length-count;
+    }
+}
+
+class Solution {
+    public boolean digitCount(String num) {
+        int[] freq = new int[10];
+        for(char c : num.toCharArray()){
+            int v = c -'0';
+            freq[v]++;
+        }
+        for(int i=0;i<num.length();i++){
+            int v = num.charAt(i) -'0';
+            if(freq[i] != v) return false;
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public String clearDigits(String s) {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)>='0' && s.charAt(i)<='9'){
+                sb.deleteCharAt(sb.length()-1);
+            }
+            else{
+                sb.append(s.charAt(i));
+            }
+        }
+        return sb.toString();
+    }
+}
