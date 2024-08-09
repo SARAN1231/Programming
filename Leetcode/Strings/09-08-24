@@ -1,0 +1,52 @@
+class Solution {
+    public String greatestLetter(String s) {
+        HashSet<Character> set = new HashSet<>();
+        for(char c : s.toCharArray()){
+            set.add(c);
+        }
+        for(char ch = 'Z';ch>='A';ch--){
+            if(set.contains(ch) && set.contains((char)('a' + (ch - 'A'))))
+            return ""+ch;
+        }
+        return "";
+    }
+}
+
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        String[] arr = s.split(" ");
+        int max =0;
+        
+        for(String ss : arr){
+            if(ss.charAt(0) >= '0' && ss.charAt(0) <='9'){
+                int v = Integer.parseInt(ss);
+                if(v <= max) return false;
+                else{
+                    max = v;
+                }
+            }
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public String removeDuplicates(String s) {
+        Stack<Character> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+    
+        stack.push(s.charAt(0));
+        for(int i=1;i<s.length();i++){
+            if(!(stack.isEmpty()) && s.charAt(i) == stack.peek()){
+                stack.pop();
+            }
+            else{
+                stack.push(s.charAt(i));
+            }
+        }
+        for(char c : stack){
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+}
