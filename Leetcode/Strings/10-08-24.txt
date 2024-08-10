@@ -1,0 +1,72 @@
+class Solution {
+    public boolean checkDistances(String s, int[] d) {
+        int[] f = new int[26];
+        for(int i=0;i<26;i++){
+            f[i] = -1;
+        }
+
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            int index = c -'a';
+
+            if(f[index] == -1){
+                f[index] = i;
+            }
+            else {
+                int rd = d[index];
+                int ad = i - f[index] - 1;
+                if(rd != ad ) return false;
+            }
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public int minLength(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        while(true){
+            boolean check = true;
+            for(int i=0;i<sb.length()-1;i++){
+                
+                char a = sb.charAt(i);
+                char b = sb.charAt(i+1);
+
+                if((a=='A' && b == 'B') || (a=='C' && b == 'D')){
+                    sb.deleteCharAt(i);
+                       sb.deleteCharAt(i);
+                    check = false;
+                }
+            }
+            if(check) break;
+        }
+        return sb.length();
+    }
+}
+
+class Solution {
+    public String getEncryptedString(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        int n = s.length();
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt((i+k)%n);
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+}
+
+class Solution {
+    public String largestGoodInteger(String num) {
+        String g = "";
+        for(int i =0;i<num.length()-2;i++){
+            if(num.charAt(i) == num.charAt(i + 1) && num.charAt(i + 2) == num.charAt(i)){
+                String s = num.substring(i,i+3);
+                if(g.equals("") || g.compareTo(s)<0){
+                    g = s;
+                }
+            }
+        }
+        return g;
+    }
+}
