@@ -1,0 +1,79 @@
+class Solution {
+    public int[] numberOfLines(int[] w, String s) {
+        int sum =0;
+        int count =1;
+        for(int i=0;i<s.length();i++){
+            int index = s.charAt(i) - 'a';
+            sum+=w[index];
+            
+             if(sum > 100){
+                sum = w[index];
+                count++;
+            }
+        }
+        int[] ans = new int[2];
+        ans[0] = count ;
+        ans[1] = sum;
+        return ans;
+    }
+}
+
+class Solution {
+    public int maxLengthBetweenEqualCharacters(String s) {
+       int max = -1;
+        int n = s.length();
+        for(int i=0;i<n-1;i++){
+            for(int j=i;j<n;j++){
+                if(s.charAt(i) == s.charAt(j)){
+                    int v = j-1-i;
+                    if(v>max) max = v;
+                }
+            }
+        }
+        return max;
+    }
+}
+
+class Solution {
+    public String makeGood(String s) {
+        StringBuilder sb =  new StringBuilder();
+       
+            for(int i=0;i<s.length();i++){
+                int len = sb.length();
+                if(len > 0 && Math.abs(sb.charAt(len-1)- s.charAt(i)) == 32){
+                    sb.deleteCharAt(len -1);
+                }
+                else{
+                    sb.append(s.charAt(i));
+                 
+                }
+            }
+            
+        return sb.toString();
+    }
+}
+
+class Solution {
+    public String[] uncommonFromSentences(String s1, String s2) {
+        HashMap<String,Integer> map = new HashMap<>();
+        List<String> l = new ArrayList<>();
+        for(String s : s1.split(" ")){
+            map.put(s, map.getOrDefault(s, 0) + 1);
+        }
+
+        for(String s : s2.split(" ")){
+            map.put(s, map.getOrDefault(s, 0) + 1);
+        }
+
+        for(Map.Entry<String,Integer> entry :map.entrySet()){
+            int v = entry.getValue();
+            if(v == 1) l.add(entry.getKey());
+        }
+
+        String[] ans = new String[l.size()];
+        for(int i=0;i<l.size();i++){
+            ans[i] = l.get(i);
+        }
+        return ans;
+    }
+}
