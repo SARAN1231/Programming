@@ -1,0 +1,99 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+        List<String> res = new ArrayList<>();
+       for(int i =0;i<emails.length;i++){
+             String[] str = emails[i].split("@");
+             StringBuilder sb = new StringBuilder();
+             for(int j =0;j<str[0].length();j++){
+                sb.append(str[0].charAt(j));
+                if(sb.charAt(sb.length()-1) =='.'){
+                    sb.deleteCharAt(sb.length()-1);
+                }
+                else if(sb.charAt(sb.length()-1) =='+'){
+                    sb.deleteCharAt(sb.length()-1);
+                   
+                    break;
+                }
+             }
+              sb.append('@');
+                    sb.append(str[1]);
+             res.add(sb.toString());
+             
+       }
+       HashSet<String> set = new HashSet<>();
+       for(String s : res){
+        set.add(s);
+       }
+       return set.size();
+    }
+}
+
+class Solution {
+    public boolean makeEqual(String[] words) {
+        int[] freq = new int[26];
+        for(String s : words){
+            for(int i=0;i<s.length();i++){
+                int v = s.charAt(i)-97;
+                freq[v]++;
+            }
+        }
+        for(int i=0;i<freq.length;i++){
+            if(freq[i] > 0){
+                if(freq[i] % words.length != 0) return false;
+            }
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public String[] divideString(String s, int k, char fill) {
+        List<String> res = new ArrayList<>();
+        for(int i=0;i<s.length();i+=k){
+            if (i + k <= s.length()) {
+                res.add(s.substring(i, i + k));
+            } 
+            else{
+                StringBuilder sb = new StringBuilder(s.substring(i));
+                while(sb.length() < k){
+                    sb.append(fill);
+                }
+                res.add(sb.toString());
+            }
+        }
+
+        String[] str = new String[res.size()];
+        for(int i=0;i<res.size();i++){
+            str[i] = res.get(i);
+        }
+        return str;
+    }
+}
+
+class Solution {
+    public String reformatDate(String date) {
+        Map<String, String> monthMap = new HashMap<>();
+        monthMap.put("Jan", "01");
+        monthMap.put("Feb", "02");
+        monthMap.put("Mar", "03");
+        monthMap.put("Apr", "04");
+        monthMap.put("May", "05");
+        monthMap.put("Jun", "06");
+        monthMap.put("Jul", "07");
+        monthMap.put("Aug", "08");
+        monthMap.put("Sep", "09");
+        monthMap.put("Oct", "10");
+        monthMap.put("Nov", "11");
+        monthMap.put("Dec", "12");
+        String[] str = date.split(" ");
+        String d = str[0].substring(0,str[0].length()-2);
+        String y = str[2];
+        if(d.length() ==1){
+            d = "0"+d;
+        }
+        String m = monthMap.get(str[1]);
+
+        return y+"-"+m+"-"+d;
+        
+    }
+}
