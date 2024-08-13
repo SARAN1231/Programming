@@ -1,0 +1,63 @@
+class Solution {
+    public String digitSum(String s, int k) {
+        while(s.length() > k) {
+            StringBuilder sb = new StringBuilder();
+            for(int i=0;i<s.length();i+=3){
+                int sum =0;
+                for(int j=i;j<i+k && j<s.length();j++){
+                    sum+= s.charAt(j) -'0';
+                }
+                sb.append(sum);
+            }
+            s= sb.toString();
+        }
+       return s;
+    }
+}
+class Solution {
+    public boolean isSubstringPresent(String s) {
+        StringBuilder sb =  new StringBuilder();
+        for(int i=s.length()-1;i>=0;i--){
+            sb.append(s.charAt(i));
+        }
+        String ss = sb.toString();
+
+        for(int i=0;i<=s.length()-2;i++){
+            String a = s.substring(i,i+2);
+            if(ss.contains(a)) return true;
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public String reformatNumber(String n) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder ans = new StringBuilder();
+        for(int i=0;i<n.length();i++){
+            if(n.charAt(i) !='-' && n.charAt(i) != ' ')
+            sb.append(n.charAt(i));
+        }
+        while(sb.length()>4){
+            ans.append(sb.substring(0,3));
+            ans.append('-');
+            sb.delete(0,3);
+        }
+        if(sb.length() == 3){
+            ans.append(sb);
+        }
+        else if(sb.length() == 4){
+            ans.append(sb.substring(0,2));
+             ans.append('-');
+            sb.delete(0,2);
+            ans.append(sb.substring(0,2));
+            
+             sb.delete(0,2);
+        }
+        else if(sb.length() == 2){
+            ans.append(sb.substring(0,2));
+             sb.delete(0,2);
+        }
+        return ans.toString();
+    }
+}
