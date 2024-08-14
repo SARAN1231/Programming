@@ -1,0 +1,88 @@
+class Solution {
+    public int numberOfSpecialChars(String word) {
+        HashSet<Character> res = new HashSet<>();
+        for(char c : word.toLowerCase().toCharArray()){
+            res.add(c);
+        }
+        HashSet<Character> ans = new HashSet<>();
+       
+        for(char c : res){
+            if(word.indexOf(c)!=-1 && word.indexOf(Character.toUpperCase(c)) != -1){
+                ans.add(c);
+            }
+         
+        }
+        return ans.size();
+    }
+}
+
+class Solution {
+    public int convertTime(String current, String correct) {
+        String[] cur = current.split(":");
+        String[] cor = correct.split(":");
+
+        int[] a = {Integer.parseInt(cur[0]),Integer.parseInt(cur[1])};
+        int[] b = {Integer.parseInt(cor[0]),Integer.parseInt(cor[1])};
+
+        int curmin = (a[0]*60)+a[1];
+        int cormin = (b[0]*60)+b[1];
+
+        int diff = Math.abs(curmin - cormin);
+
+         if (curmin > cormin)
+            diff = (24  * 60) - diff;
+
+        int ops = diff / 60;
+        int rem = diff % 60;
+        ops += rem / 15;
+        rem = rem % 15;
+        ops += rem / 5;
+        rem = rem % 5;
+        ops += rem / 1;
+
+        return ops;
+    }
+}
+
+class Solution {
+    public String reverseOnlyLetters(String s) {
+        
+        int l=0;
+        int r =s.length()-1;
+        char[] ch = s.toCharArray();
+        while(l<r){
+            while (l < r && !Character.isLetter(s.charAt(l))) {
+                l++;
+            }
+            // find the rightmost English letter
+            while (l < r && !Character.isLetter(s.charAt(r))) {
+                r--;
+            }
+            char temp = ch[l];
+            ch[l] = ch[r];
+            ch[r] = temp;
+            l++;
+            r--;
+        }
+        return new String(ch);
+    }
+}
+
+class Solution {
+    public boolean checkAlmostEquivalent(String word1, String word2) {
+        int[] f1 = new int[26];
+        int[] f2 = new int[26];
+
+        for(int i=0;i<word1.length();i++){
+            f1[word1.charAt(i) - 97]++;
+        }
+        for(int i=0;i<word2.length();i++){
+            f2[word2.charAt(i) - 97]++;
+        }
+        for(int i=0;i<26;i++){
+            int a = Math.abs(f1[i] - f2[i]);
+            if(a>3) return false;
+        }
+        return true;
+    }
+}
