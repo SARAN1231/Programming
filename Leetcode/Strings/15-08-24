@@ -1,0 +1,54 @@
+class Solution {
+    public List<String> stringMatching(String[] words) {
+        Set<String> ans = new HashSet<>();
+            for(int i=0;i<words.length;i++){
+                for(int j=0;j<words.length;j++){
+                    if(i!=j){
+                        if(words[i].contains(words[j])){
+                            ans.add(words[j]);
+                        }
+
+                    }
+                    
+                }
+            }
+            return new ArrayList<>(ans);
+        
+    }
+}
+
+class Solution {
+    public int maximumLengthSubstring(String s) {
+        int max =0;
+        for(int l=0;l<s.length();l++){
+            HashMap<Character,Integer> map = new HashMap<>();
+            int r = l;
+            while(r<s.length()){
+                char c = s.charAt(r);
+                if(map.containsKey(c) && map.get(c) == 2) break;
+                else {
+                    map.put(c,map.getOrDefault(c,0)+1);
+                }
+                r++;
+            }
+            max = Math.max(max,r-l);
+        }
+        return max;
+    }
+}
+
+class Solution {
+    public int minOperations(String s) {
+        int c1 =0; int c2 = 0;
+
+        for(int i=0;i<s.length();i++){
+            char ch1 = (i%2 == 0) ? '0':'1';
+            char ch2 = (i%2 == 0) ? '1':'0';
+
+            if(ch1 != s.charAt(i)) c1++;
+            if(ch2 != s.charAt(i)) c2++;
+
+        }
+        return Math.min(c1,c2);
+    }
+}
