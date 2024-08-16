@@ -1,0 +1,22 @@
+
+
+class Solution {
+    public int maxDistance(List<List<Integer>> arrays) {
+        int min = arrays.get(0).get(0);
+        int max = arrays.get(0).get(arrays.get(0).size()-1);
+        int maxd = 0;
+
+        for(int i=1;i<arrays.size();i++){
+              List<Integer> arr = arrays.get(i);
+            int cmin = arr.get(0);
+            int cmax = arr.get(arr.size() - 1);
+
+            maxd = Math.max(maxd,Math.abs(cmax-min));
+            maxd = Math.max(maxd,Math.abs(cmin-max));
+
+            min = Math.min(min,cmin);
+            max = Math.max(max,cmax);
+        }
+        return maxd;
+    }
+}
