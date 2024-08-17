@@ -1,0 +1,36 @@
+class Solution {
+    public boolean isCircularSentence(String s) {
+        String[] str  = s.split(" ");
+        String ss = str[str.length-1];
+        String s1 = str[0];
+        if(s1.charAt(0) != ss.charAt(ss.length()-1)){
+            return false;
+        }
+        for(int i=0;i<str.length-1;i++){
+            if(str[i].charAt(str[i].length()-1) != str[i+1].charAt(0)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public boolean isPathCrossing(String path) {
+        HashSet<String> res = new HashSet<>();
+        int x =0,y=0;
+        res.add("0,0");
+        for(char c : path.toCharArray()){
+            if(c == 'N') y++;
+            else if(c == 'S') y--;
+            else if(c == 'E') x++;
+            else x--;
+            String s = x+","+y;
+            if(res.contains(s)){
+                return true;
+            }
+            res.add(s);
+        }
+        return false;
+    }
+}
