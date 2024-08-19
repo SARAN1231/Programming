@@ -1,0 +1,68 @@
+jack has an array A of length N. He wants to label whether the number in the arrayis even or odd. Your task is to help him find and return a string with labels even or odd in sequence according to which the numbers appear in the array.
+
+Input 1:
+
+[1, 2, 3, 4, 5, 6]
+
+6
+
+Output1: OddEvenOddEvenOddEven
+
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int[] arr = new int[6];
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<6;i++){
+		    arr[i] = sc.nextInt();
+		    if(arr[i] % 2 == 0) {
+		        sb.append("Even");
+		    }
+		    else{
+		        sb.append("Odd");
+		    }
+		}
+		System.out.print(sb.toString());
+	}
+}
+
+2 You are given a string S and your task is to find and return the count of permutation formed by fixing the positions of the vowels present in the string.
+
+Note:
+
+* Ensure the result is non-negative
+
+* If there are no consonants then return 0.
+
+Input1:
+
+ABC
+
+A. B C -> b c -> cb
+
+Output2:
+2
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String s = sc.nextLine();
+		s = s.toLowerCase();
+		int count = s.length();
+		for(int i=0;i<s.length();i++){
+		    if(s.charAt(i) == 'a' ||s.charAt(i) == 'e' || s.charAt(i) == 'i' || s.charAt(i) == 'o' || s.charAt(i) == 'u') count--;
+		}
+		int ans = 1;
+		for(int i=count;i>0;i--){
+		   ans *=i;
+		}
+		System.out.print(ans);
+	}
+}
+
+
