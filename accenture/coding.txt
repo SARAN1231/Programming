@@ -114,3 +114,57 @@ public class Main
 	}
 }
 
+-> https://www.youtube.com/watch?v=GmkX0upyKNc
+
+1
+
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+	    StringBuilder sb = new StringBuilder();
+		Scanner sc = new Scanner(System.in);
+		String n = sc.nextLine();
+		String[] arr = n.split("0");
+		for(String s : arr){
+		    sb.append((char)(64+s.length()));
+		}
+		System.out.print(sb.toString());
+	}
+}
+
+2 googly prime number qn in above vdo
+
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+	    StringBuilder sb = new StringBuilder();
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int sum =0;
+		while(n>0){
+		    int r = n%10;
+		    sum+=r;
+		    n/=10;
+		}
+		if(isprime(sum)){
+		    System.out.print("YES");
+		}
+		else {
+		    System.out.print("NO");
+		}
+	}
+	
+	public static boolean isprime(int n) {
+	    if(n <= 2) return true;
+	    for(int i=2;i<=n/2;i++){
+	        if(n%i ==0) return false;
+	    }
+	    return true;
+	}
+}
+
+
