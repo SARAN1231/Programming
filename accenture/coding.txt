@@ -168,3 +168,135 @@ public class Main
 }
 
 
+https://www.youtube.com/watch?v=0Cn0xsjvwdE
+
+
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int l= sc.nextInt();
+	    List<Integer> arr = new ArrayList<>();
+	    int count =0;
+	    for(int i=1;i<=l;i++){
+	        int sum =0;
+	        int n =i;
+	        while(n>0){
+	            if(n%2 ==0) {
+	                arr.add(1);
+	                sum+=1;
+	            }
+	            else {
+	                arr.add(2);
+	                sum+=2;
+	            }
+	            n/=2;
+	        }
+	        if(sum%2 !=0) count++;
+	        
+	    }
+	    System.out.print(count);
+	    
+	}
+}
+
+
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int n= sc.nextInt();
+	    int sum =0;
+	    for(int i=2;i<=n;i++){
+	        if(isprime(i)){
+	        sum+=i;
+	    }
+	    }
+	    System.out.print(sum);
+	    
+	}
+	
+	public static boolean isprime(int n){
+	    if(n<=2) return true;
+	    for(int i=2;i<=n/2;i++){
+	        if(n%i == 0) return false;
+	    }
+	    return true;
+	}
+}
+
+
+https://www.youtube.com/watch?v=aTruFbP2ZK4&t=713s
+
+
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    String s = sc.nextLine();
+	    int max = 0;
+	    
+	    List<String> str = new ArrayList<>();
+	    for(int i=0;i<s.length()-2;i++){
+	        str.add(s.substring(i,i+3));
+	        int count =0;
+	        for(int j=0;j<str.get(i).length();j++){
+	            
+	            String ss = str.get(i);
+	            if(ss.charAt(j) == 'a') count++;
+	        }
+	        max = Math.max(max,count);
+	    }
+	    System.out.print(max);
+	}
+}
+
+acdbaaca
+2
+
+
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int n = sc.nextInt();
+	    int[] arr = new int[n];
+	    for(int i=0;i<n;i++){
+	        arr[i] = sc.nextInt(); 
+	    }
+	    int[] psum = new int[n];
+	    for(int i=0;i<n;i++){
+	        int sum = 0;
+	        for(int j=0;j<i;j++){
+	            sum += arr[j];
+	        }
+	        psum[i] = sum;
+	    }
+	    int[] ssum = new int[n];
+	    for(int i=0;i<n;i++){
+	        int sum =0;
+	        for(int j =n-1;j>i;j--){
+	            sum+=arr[j];
+	        }
+	        ssum[i] = sum;
+	    }
+	    for(int i=0;i<n;i++){
+	        if(psum[i] == ssum[i]) {
+	            System.out.print(i);
+	            break;
+	        }
+	    }
+	}
+}
+
+n = 7
+-7 1 5 2 -4 3 0
+3
