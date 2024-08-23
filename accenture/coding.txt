@@ -392,7 +392,7 @@ class HelloWorld {
 }
 
 
-
+https://www.youtube.com/watch?v=bjVquSUySYQ
 import java.util.*;
 
 class HelloWorld {
@@ -408,5 +408,80 @@ class HelloWorld {
             sb.append(str[i]+" ");
         }
         System.out.print(sb.toString());
+    }
+}
+
+https://www.youtube.com/watch?v=Aonsl6bB7nI
+
+import java.util.*;
+
+class HelloWorld {
+   
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+         int n = sc.nextInt();
+         int[] arr =new int[n];
+         for(int i=0;i<n;i++){
+             arr[i] = sc.nextInt();
+         }
+         for(int i=0;i<n;i++){
+             if(arr[i] > arr[i+1]) {
+                 System.out.print(arr[i]);
+                 break;
+             }
+         }
+    }
+}
+
+https://www.youtube.com/watch?v=Ww51yvMNfkg
+
+import java.util.*;
+
+class HelloWorld {
+   
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int n =0;
+        int c =0;
+        if(Character.isDigit(s.charAt(0)) || s.length() < 4) System.out.print(0);
+        else {
+            for(int i=0;i<s.length();i++){
+                if(s.charAt(i) ==' ' && s.charAt(i) == '/'){
+                    System.out.print(0);
+                    break;
+                }
+                if(Character.isUpperCase(s.charAt(i)))c++;
+                if(Character.isDigit(s.charAt(i)))n++;
+            }
+        }
+        if(c>0 && n>0) System.out.print(1);
+        else System.out.print(0);
+    }
+}
+
+import java.util.*;
+
+class HelloWorld {
+   
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int n = s.length();
+        int ans = s.charAt(0)-'0';
+       for(int i=1;i<n;i+=2){
+           int b = s.charAt(i+1) - '0';
+           if(s.charAt(i) == 'A'){
+               ans &=b;
+            }
+            else if(s.charAt(i) == 'B') {
+               ans |=b;
+            }
+            else {
+                  ans ^=b;
+            }
+           
+    }
+    System.out.print(ans);
     }
 }
