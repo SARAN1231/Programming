@@ -1,0 +1,36 @@
+class Solution {
+    public boolean checkIfExist(int[] arr) {
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr.length;j++){
+                if(arr[i] == 2 * arr[j] && i!=j)return true;
+            }
+        }
+        return false;
+    }
+}class Solution {
+    public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        int count = 0;
+        
+        // Loop through each element of arr1
+        for (int i = 0; i < arr1.length; i++) {
+            boolean isValid = true;
+            
+            // Check against each element of arr2
+            for (int j = 0; j < arr2.length; j++) {
+                // If the condition is violated, mark as invalid
+                if (Math.abs(arr1[i] - arr2[j]) <= d) {
+                    isValid = false;
+                    break;
+                }
+            }
+            
+            // If arr1[i] is valid, increment count
+            if (isValid) {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+}
+
