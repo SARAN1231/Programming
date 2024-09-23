@@ -143,4 +143,67 @@ class Solution {
         }
         return esum - osum;
     }
+}class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        HashMap<Character,Character> map = new HashMap<>();
+        if(s.length() != t.length()) return false;
+        for(int i=0;i<s.length();i++){
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
+            if(map.containsKey(sc)){
+                if(map.get(sc) != tc) return false;
+            }
+            else {
+                if(map.containsValue(tc)){
+                    return false;
+                }
+                map.put(sc,tc);
+            }
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public boolean wordPattern(String p, String s) {
+        HashMap<Character,String> map = new HashMap<>();
+        String[] str = s.split(" ");
+        if(p.length() != str.length) return false;
+        for(int i=0;i<p.length();i++){
+            char pc = p.charAt(i);
+            String sc = str[i];
+            if(map.containsKey(pc)) {
+                 if(!map.get(pc).equals(sc)) return false;
+            }
+            else {
+                if(map.containsValue(sc)) return false;
+                map.put(pc,sc);
+            }
+        }
+        return true;
+    }
+}class Solution {
+    public String[] findRestaurant(String[] list1, String[] list2) {
+        ArrayList<String> arr = new ArrayList<>();
+        int minsum = Integer.MAX_VALUE;
+        int sum = 0;
+    
+        for(int i=0;i<list1.length;i++){
+            for(int j=0;j<list2.length;j++){
+                if(list1[i].equals(list2[j])){
+                    sum = i+j;
+                    if(sum < minsum) {
+                        minsum = sum;
+                        arr.clear();
+                        arr.add(list1[i]);
+                        
+                    }
+                    else if (sum == minsum) {
+                        arr.add(list1[i]);
+                    }
+                }
+            }
+        }
+        return arr.toArray(new String[arr.size()]);
+    }
 }
