@@ -207,3 +207,45 @@ class Solution {
         return arr.toArray(new String[arr.size()]);
     }
 }
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        // Step 1: Remove punctuation and convert to lowercase
+        String p = paragraph.replaceAll("[^A-Za-z ]", "").toLowerCase();
+        
+        // Step 2: Split the paragraph into words using the correct regex for spaces
+        String[] str = p.split("\\s+");
+        
+        // Step 3: Add banned words to a set for quick lookup
+        Set<String> set = new HashSet<>();
+        for (String ban : banned) {
+            set.add(ban);
+        }
+
+        // Step 4: Count the occurrence of each word, ignoring banned words
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String s : str) {
+            if (!set.contains(s) && !s.isEmpty()) {
+                map.put(s, map.getOrDefault(s, 0) + 1);
+            }
+        }
+
+        // Step 5: Find the most common word
+        String mc = "";
+        int maxCount = 0;
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                mc = entry.getKey();
+                maxCount = entry.getValue();
+            }
+        }
+        
+        return mc;
+    }
+}
+
