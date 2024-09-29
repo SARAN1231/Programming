@@ -301,7 +301,6 @@ class Solution {
 }
 }
 
-salouit
 
 class Solution {
     public double average(int[] salary) {
@@ -312,5 +311,51 @@ class Solution {
             sum+=salary[i];
         }
         return sum/(n-2);
+    }
+}
+
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+        
+        for(int i=0;i<letters.length;i++) {
+            if(letters[i] > target) {
+              
+                return letters[i];
+            }
+        }
+        return letters[0];
+    }
+}
+
+class Solution { 
+    public int count(int n,int[] nums){
+        int c = 0;
+        for(int i : nums) {
+            if(i == n) c++;
+        }
+        return c;
+    }
+    public int countElements(int[] nums) {
+        if(nums.length <= 1) return 0;
+        Arrays.sort(nums);
+        int min = nums[0];
+        int max = nums[nums.length-1];
+        int minc = count(min,nums);
+        int maxc = count(max,nums);
+        int res =  nums.length - minc - maxc;
+        if(res < 0)
+        return 0;
+        else return res;
+
+    }
+}
+
+
+class Solution {
+    public int smallestRangeI(int[] nums, int k) {
+        Arrays.sort(nums);
+        int min = nums[0];
+        int max = nums[nums.length-1];
+        return (max - k) - (min+k) < 0 ? 0 : (max - k) - (min+k) ; 
     }
 }
