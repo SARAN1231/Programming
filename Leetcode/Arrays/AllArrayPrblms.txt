@@ -397,3 +397,24 @@ class Solution {
        return res;
     }
 }
+
+class Solution {
+    public boolean isValid(String word) {
+        int v =0,c =0;
+        if(word.length() < 3) return false;
+        for(int i=0;i<word.length();i++) {
+            char ch = word.charAt(i);
+           if(ch=='a' || ch=='A' || ch=='e' || ch=='E' || ch=='i' || ch=='I' || ch=='o' || ch=='O' || ch=='u' || ch=='U') {
+            v++;
+           }
+           else if((ch >= 65 && ch <= 90 ) || (ch>=97 && ch<=122)){
+            c++;
+           }
+           else if(ch >= 48 && ch <= 57) continue;
+           else return false;
+           
+        }
+
+        return c >=1 && v >= 1 ? true : false;
+    }
+}
