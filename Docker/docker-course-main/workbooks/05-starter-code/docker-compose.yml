@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  postgresql:
+    image: postgres:14
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  flaskapp:
+    image: postgres-demo          # your Flask Docker image name
+    container_name: flask-app
+    depends_on:
+      - postgresql                # ensure DB starts before app
+    environment:
+      DATABASE_HOST: postgresql   # internal service name
+      DATABASE_USER: user
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: db
+    ports:
+      - "3000:3000"               # Flask will be available on localhost:3000
+
+volumes:
+  pg_data:

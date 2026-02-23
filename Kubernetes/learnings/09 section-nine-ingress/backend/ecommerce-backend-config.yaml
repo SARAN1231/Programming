@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecommerce-backend-config
+  namespace: ecommerce
+data:
+  DATABASE_HOST: ecommerce-database-service
+  DATABASE_PORT: "27012"
+  DATABASE_NAME: ecommerce_db
+
+
+

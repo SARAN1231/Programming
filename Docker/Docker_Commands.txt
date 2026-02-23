@@ -1,0 +1,14 @@
+docker -v -  To check the version 
+docker info - To list my docker info 
+docker pull image-name - To download the image from registry/dockerHub
+docker run image-name - To start the container
+docker stop containerID - To Stop the container
+docker images - To list all available images
+docker build image-name . - To create a docker image from base image 
+docker ps (process status) - To list all running container
+docker ps -a - To list all available containers
+docker start conatainerID - To Again restart the same container 
+docker exec -it containerName psql -U postgres - To get into container which contains postgres we can directly interact with DB. -it ->interative exec -> execute psql -U postgres -> -u username 	
+docker run --name Postgres_Test_Container -e POSTGRES_PASSWORD=password postgres - custom container name 
+docker rm Containerid - to remove container
+docker rmi imageId - to remove image

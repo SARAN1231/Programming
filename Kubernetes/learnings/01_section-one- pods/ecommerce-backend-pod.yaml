@@ -1,0 +1,23 @@
+apiVersion: v1                    # API version for core Kubernetes objects (Pods, Services, etc.)
+kind: Pod                         # We are creating a Pod (smallest deployable unit in Kubernetes)
+
+metadata:
+  name: ecommerce-backend     # Name of the Pod
+  labels:                         # Labels used for identification, Service matching, selectors, etc.
+    app.kubernetes.io/name: ecommerce   # Standard app name label
+    app.kubernetes.io/component: backend        # Component type (frontend/backend/db)
+    app.kubernetes.io/instance: ecommerce-backend-app   # Unique instance label for grouping app resources
+
+spec:
+  containers:                     # List of containers inside this Pod (usually 1 container per Pod)
+  - name: ecommerce-backend      # Name of the container
+    image: saran3112/spring-backend:latest   # Docker image stored on Docker Hub
+    resources:                    # CPU and memory resource limits & requests
+      requests:
+        memory: "128Mi"           # Minimum memory required for the container
+        cpu: "200m"               # Minimum CPU required (200m = 0.2 CPU core)
+      limits:
+        memory: "128Mi"           # Maximum memory container can use
+        cpu: "500m"               # Maximum CPU container can use (500m = 0.5 CPU core)
+    ports:
+      - containerPort: 8080        # Port inside the container that the app is running on (Nginx serves on 80)

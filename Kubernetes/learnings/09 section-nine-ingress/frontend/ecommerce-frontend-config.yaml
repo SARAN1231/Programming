@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecommerce-frontend-config
+  namespace: ecommerce
+data:
+  VITE_BACKEND_URL: "ecommerce-backend-service"

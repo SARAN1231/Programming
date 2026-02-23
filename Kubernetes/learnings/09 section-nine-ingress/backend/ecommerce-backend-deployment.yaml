@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-backend          # Name of the Deployment
+  namespace: ecommerce             # Namespace where the deployment runs
+spec:
+  replicas: 3                      # Number of backend pod replicas for load balancing & HA
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: ecommerce-backend-app   # This must match template.labels
+  strategy:
+    type: RollingUpdate            # Rolling update strategy for zero-downtime deployments
+    rollingUpdate:
+      maxUnavailable: 50%          # During update, up to 50% of old pods can be unavailable
+      maxSurge: 1                  # Ex : If we are updating to next version. in this case it will create 3 new replicas old ones will be gradually decreasing (At a time it can have 4(3 replicas + 1 maxsurge) pods running during update)
+  template:
+    metadata:
+      labels:                      # Labels used for pod identification & service selection
+        app.kubernetes.io/name: ecommerce-backend         # Logical app name
+        app.kubernetes.io/component: backend              # Component type
+        app.kubernetes.io/instance: ecommerce-backend-app # Must match selector.matchLabels
+    spec:
+      containers:
+      - name: ecommerce-backend     # Name of the container inside the pod
+        image: saran3112/spring-backend:latest   # Docker image stored on Docker Hub
+
+        # ----------- HEALTH CHECKS -------------
+        # Liveness Probe → checks if app is alive; if fails, Kubernetes restarts the pod
+        livenessProbe:
+          httpGet:
+            path: /health           # Endpoint your backend must expose
+            port: 8080              # Container port to check
+          initialDelaySeconds: 15   # Wait 15 seconds before first check (let app start first)
+          periodSeconds: 20         # Check every 20 seconds
+
+        # Readiness Probe → checks if app is ready to accept traffic
+        readinessProbe:
+          httpGet:
+            path: /ready            # Endpoint your backend musent expose
+            port: 8080
+          initialDelaySeconds: 10   # Wait before marking pod "ready"
+          periodSeconds: 15         # Check every 15 seconds
+        envFrom:
+          - configMapRef:
+              name: ecommerce-backend-config
+          - secretRef:
+              name: ecommerce-backend-secrets
+        # ----------- RESOURCE SETTINGS ----------
+        resources:
+          requests:                 # Minimum guaranteed resources
+            memory: "512Mi"         # Spring Boot needs at least 512Mi to run smoothly
+            cpu: "200m"             # 0.2 CPU core
+          limits:                   # Maximum allowed resources
+            memory: "1Gi"           # Cap memory usage so pod doesn’t consume entire node
+            cpu: "500m"             # Max 0.5 CPU core
+
+        ports:
+          - containerPort: 8080     # Backend runs on port 8080 inside container

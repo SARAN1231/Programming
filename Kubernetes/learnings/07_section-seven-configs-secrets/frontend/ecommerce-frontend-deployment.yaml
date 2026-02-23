@@ -1,0 +1,57 @@
+# dont run this yaml file it just for demo purpose for liveness and readiness probes
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-frontend
+  namespace: ecommerce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: ecommerce-frontend-app 
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 1 # Ex : If we are updating to next version. in this case it will create 3 new replicas old ones will be gradually decreasing (At a time it can have 4(3 replicas + 1 maxsurge) pods running during update)
+  template:
+    metadata:
+      labels:                         # Labels used for identification, Service matching, selectors, etc.
+        app.kubernetes.io/name: ecommerce-frontend  # Standard app name label
+        app.kubernetes.io/component: frontend        # Component type (frontend/backend/db)
+        app.kubernetes.io/instance: ecommerce-frontend-app    # Unique instance label for grouping app resources
+    
+    spec:
+      containers:                     # List of containers inside this Pod (usually 1 container per Pod)
+      - name: ecommerce-frontend      # Name of the container
+        image: saran3112/ecommerce-frontend:latest   # Docker image stored on Docker Hub
+         # ----------- HEALTH CHECKS -------------
+        # Liveness Probe → checks if app is alive; if fails, Kubernetes restarts the pod
+        livenessProbe:
+          httpGet:
+            path: /health           # Endpoint your backend must expose
+            port: 8080              # Container port to check
+          initialDelaySeconds: 15   # Wait 15 seconds before first check (let app start first)
+          periodSeconds: 20         # Check every 20 seconds
+
+        # Readiness Probe → checks if app is ready to accept traffic
+        readinessProbe:
+          httpGet:
+            path: /ready            # Endpoint your backend must expose
+            port: 8080
+          initialDelaySeconds: 10   # Wait before marking pod "ready"
+          periodSeconds: 15         # Check every 15 seconds
+        envFrom:
+          - configMapRef:
+              name: ecommerce-frontend-config
+        resources:                    # CPU and memory resource limits & requests
+          requests:
+            memory: "128Mi"           # Minimum memory required for the container
+            cpu: "200m"               # Minimum CPU required (200m = 0.2 CPU core)
+          limits:
+          
+            memory: "128Mi"           # Maximum memory container can use
+            cpu: "500m"               # Maximum CPU container can use (500m = 0.5 CPU core)
+        ports:
+          - containerPort: 80         # Port inside the container that the app is running on (Nginx serves on 80)

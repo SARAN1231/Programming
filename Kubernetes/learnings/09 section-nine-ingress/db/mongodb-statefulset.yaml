@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: ecommerce
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  serviceName: mongodb # creates a pod with prefix name as mongodb-0,mongodb-1,...
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ecommerce-db  # Standard app name label
+        app.kubernetes.io/component: db        # Component type (frontend/backend/db)
+        app.kubernetes.io/instance: mongodb     # Unique instance name
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:6.0
+        envFrom:
+        - secretRef:
+            name: mongodb-secrets
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongodb-pvc
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb-pvc
+    spec:
+      accessModes: [ "ReadWriteOnce" ] # ReadWriteOnce : only one node can mount the volume for read/write
+      resources:
+        requests:
+          storage: 1Gi
